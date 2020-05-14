@@ -1,0 +1,106 @@
+.app_body_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  z-index: 500;
+  background: linear-gradient( rgba(111 , 0 ,255 , 1) 0% , rgba(55 , 0 ,255 , 1)100%);               
+}
+.app_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  border-radius: 32px  32px  0 0;
+  background-color: rgb(255, 255, 255);        
+  box-shadow: 0px 0px 25px -5px;                 
+}
+.app_body img {
+  width: 60px;
+  height: 60px;
+  transition: width 325ms ease-in-out, height 325ms ease-in-out;
+}
+.app_body img:hover {
+  width: 80px;
+  height: 80px;
+  transition: width 325ms ease-in-out, height 325ms ease-in-out;
+  cursor: pointer;
+}
+.app_body img:active {
+  transition: width 50ms ease-in-out, height 50ms ease-in-out;
+  width: 70px;
+  height: 70px;
+}
+.app_body button {
+  width: 30%;
+  height: 50px;
+  border-radius: 4px;
+  font-size: 1.5vw;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  color: #aaa; 
+  background-color: #1b1b1b;
+  transition: background-color 350ms ease-in-out, color 350ms ease-in-out;
+  margin-top: 20px;
+}
+.app_body button:hover {
+  color: white;
+  background-color: rgb(200, 0, 105);
+  transition: background-color 350ms ease-in-out, color 350ms ease-in-out;
+  cursor: pointer;
+}
+.app_body_title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40%;
+}
+.app_body_cards {
+  width: 100%;
+  height: 25%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+.app_body_about_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: red;
+  height: 60%;
+  border-radius: 32px;
+}
+
+.app_body_title h1 {
+  font-size: 4vw;
+  margin-right: 2vw;
+  color: white;
+}
+
+.app_body_cards h1 {
+  margin: 2vw 0 0 0;
+  font-size: 2.5vw;
+  opacity: 0.6;
+}
+.app_body_cards p {
+  margin: 0;
+  font-size: 2vw;
+  opacity: 0.4;
+}
+
+.app_body_about_info_card {
+  width: 50%;
+  height: 55%;
+  margin: 1vw;
+  border-radius: 16px;
+  padding: 15px;
+  color: #ccc;
+}
