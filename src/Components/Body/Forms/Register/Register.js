@@ -13,21 +13,21 @@ class Register extends PureComponent {
         // API DATA
         users: {},
         // FORMS
-        
+
         registerForms: {
             username: {
                 valid: false,
                 title: "User Name",
-                type: "text",
+                type: "num",
                 value: "",
                 placeholder: "Username",
                 border: "2px solid rgb(100,0 ,255)",
                 validation: {
-                    specialCarac: true,
+                    sc: true,
                     required: true,
                     touched: false,
-                    minLength: 6,
-                    maxLength: 18,
+                    minL: 6,
+                    maxL: 18,
                 }
             },
             name: {
@@ -38,10 +38,10 @@ class Register extends PureComponent {
                 placeholder: "First Name",
                 border: "2px solid rgb(100,0 ,255)",
                 validation: {
-                    specialCarac: true,
+                    sc: true,
                     required: true,
-                    minLength: 2,
-                    maxLength: 16,
+                    minL: 2,
+                    maxL: 16,
                     touched: false,
                 }
             },
@@ -53,10 +53,10 @@ class Register extends PureComponent {
                 placeholder: "Last Name",
                 border: "2px solid rgb(100,0 ,255)",
                 validation: {
-                    specialCarac: true,
+                    sc: true,
                     required: true,
-                    minLength: 2,
-                    maxLength: 16,
+                    minL: 2,
+                    maxL: 16,
                     touched: false,
                 }
             },
@@ -69,9 +69,8 @@ class Register extends PureComponent {
                 border: "2px solid rgb(100,0 ,255)",
                 validation: {
                     required: true,
-                    emailValid: true,
+                    e: true,
                     touched: false,
-                    emailValidation : true, 
                 }
             },
             password: {
@@ -81,12 +80,11 @@ class Register extends PureComponent {
                 value: "",
                 placeholder: "Password",
                 border: "2px solid rgb(100,0 ,255)",
-                validation: { 
-                    specialCarac: true,
+                validation: {
+                    p: true,
                     required: true,
-                    confirmed: true,
-                    minLength: 8,
-                    maxLength: 64,
+                    minL: 8,
+                    maxL: 64,
                     touched: false,
                 }
             },
@@ -98,19 +96,17 @@ class Register extends PureComponent {
                 placeholder: "Confirm Password",
                 border: "2px solid rgb(100,0 ,255)",
                 validation: {
-                    specialCarac: true,
-                    match : true, 
+                    p: true,
+                    match: true,
                     required: true,
-                    confirmed: true,
-                    minLength: 8,
-                    maxLength: 64,
+                    minL: 8,
+                    maxL: 64,
                     touched: false,
                 }
             },
         },
-       
-    }
 
+    }
 
     componentDidMount() {
         axios.get("/users.json")
@@ -131,117 +127,111 @@ class Register extends PureComponent {
         const newField = {
             ...newFields[id],
         }
+
         newField.value = event.target.value
-        newField.validation.touched = true;
-        newField.valid = this.validateInputHandler(id, newField , newFields.password.value)
+        newField.valid = this.validateInputHandler(id, newField.validation, newField.value)
         newFields[id] = newField;
 
-        this.setState({ registerForms: newFields }) 
+        this.setState({ registerForms: newFields })
 
-        let valid = true;  
+        if (newField.valid) {
 
-        for(let id in newFields){
+            newField.border = "2px solid green";
 
-            valid = newFields[id].valid && valid; 
+        } else {
 
-        }
-        if(valid === true){
-            
-            this.props.validateUser()
-
-        }else{
-
-            this.props.invalidateUser()
+            newField.border = "2px solid red"
 
         }
+
+        let allValidated = false;
+
+        if (newField.value !== "") {
+
+            allValidated = true;
+
+        }
+
+        for (let i in newFields) {
+
+            allValidated = newFields[i].valid && allValidated;
+
+        }
+
+        console.log("ALL FORMS ARE VALIDATED?", allValidated);
+
+        if(allValidated){
+            this.props.validateUser(); 
+        }else {
+            this.props.invalidateUser();
+        }
+
     }
 
-    validateInputHandler = (id, forms , password) => {
-        const regex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g;
 
-        let isValidated = false;
 
-        if(forms.validation.touched !== true && isValidated){
+    validateInputHandler = (id, rules, value) => {
 
-            isValidated = true; 
+        const scRegex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
+        const pRegex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g;
+        const eRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+
+        let isValid = true;
+
+        if (rules.minL) {
+
+            isValid = value.length >= rules.minL && isValid;
 
         }
-        if(forms.validation.minLength){
+        if (rules.maxL) {
+
+            isValid = value.length <= rules.maxL && isValid;
+
+        }
+        if (rules.sc) {
             
-              if(forms.value.length >= forms.validation.minLength){
+            isValid = scRegex.test(String(value)) && isValid;
 
-                isValidated = true; 
-    
-              }
-              else{
-                  isValidated = false; 
-              }    
         }
-        if(forms.validation.maxLength){
-
-            if(forms.validation.maxLength >= forms.value.length && isValidated){
-                isValidated = true;       
-            }
-            else {
-                isValidated = false; 
-            }
-      } 
-      if(forms.validation.match){
-
-        if(forms.value === password && isValidated) {
-
-            isValidated = true;
-
-        }else{
-            isValidated = false;
+        if(rules.e) {
+            isValid = eRegex.test(String(value)) && isValid;
         }
-      }
-      if(forms.validation.emailValid) {
-
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-        isValidated = re.test(forms.value) && isValidated; 
-
-
-      }
-      if(forms.validation.specialCarac){
-
-        isValidated = regex.test(forms.value) && isValidated;
-
-      }
-
-        if (!isValidated) {
-            forms.border = '2px solid rgb(255,0,0)';
-        }else{
-            forms.border = '2px solid rgb(0,255,0)';
+        if(rules.p){
+            isValid = pRegex.test(String(value)) && isValid;
         }
-        return(isValidated)
+        if(rules.match){
+            isValid =  value === this.state.registerForms.password.value && isValid; 
+        }  
+        
+            return isValid
+
+        
     }
 
     submitRegisterHandler = (event) => {
 
         event.preventDefault();
 
-        const user = {...this.state.registerForms}; 
+        const user = { ...this.state.registerForms };
         const values = [];
-        
-        for(let id in user) {
+
+        for (let id in user) {
 
             values[id] = user[id].value
         }
-        
-        console.log(values)
 
     }
     render() {
 
-        let registerButtonClass= 'register_button'; 
-        let invalidFormAlert; 
-        
-        let rForms = [];
-        if(this.props.validation) {
 
-            registerButtonClass ='register_button enabled'
+        let registerButtonClass = 'register_button';
+        let invalidFormAlert;
+
+        let rForms = [];
+        if (this.props.validation) {
+
+            registerButtonClass = 'register_button enabled'
 
         }
         for (let id in this.state.registerForms) {
@@ -264,12 +254,12 @@ class Register extends PureComponent {
                                 title={form.title}
                                 border={form.border}
                                 value={form.value}
-                                type = {form.type}
+                                type={form.type}
                                 changed={(event) => this.inputChangeHandler(event, form.id)}
                             />
                         )
                     })}
-                    <button type="submit" className = {registerButtonClass} /* disabled = {!this.props.validation} */>Register</button>
+                    <button type="submit" className={registerButtonClass} /* disabled = {!this.props.validation} */>Register</button>
                 </form>
 
             </div>
@@ -287,7 +277,7 @@ const mapPropsToDispatch = dispatch => {
 
     return {
         validateUser: () => dispatch({ type: validation.VALIDATE_USER }),
-        invalidateUser : () => dispatch({type : validation.INVALIDATE_USER})
+        invalidateUser: () => dispatch({ type: validation.INVALIDATE_USER })
 
     }
 

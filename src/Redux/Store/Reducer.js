@@ -11,9 +11,13 @@ const reducer = (state = inicialState, action) => {
 
     switch (action.type) {
         case validation.VALIDATE_USER : 
+       
         return { validation : true};
+        console.log(validation)
         case validation.INVALIDATE_USER : 
+      
         return {validation : false} 
+        console.log(validation)
         
     }
       

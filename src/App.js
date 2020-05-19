@@ -4,6 +4,7 @@ import Header from './Components/Header/Header';
 import Body from './Components/Body/Body';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Register from './Components/Body/Forms/Register/Register';
+import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
@@ -36,4 +37,19 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+
+  return{
+
+    auth : state.auth
+
+  }
+
+}
+
+const mapDispatchToProps = dispatch => {
+
+  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
