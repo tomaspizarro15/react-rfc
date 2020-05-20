@@ -5,32 +5,33 @@ import Body from './Components/Body/Body';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Register from './Components/Body/Forms/Register/Register';
 import { connect } from 'react-redux';
+import Features from './Components/Body/Features/Features';
 
 class App extends Component {
+
+  componentDidMount() {
+    console.log("IS VALIDATED IN APP?", this.props.validation)
+  }
+  componentDidUpdate() {
+    console.log("IS VALIDATED IN APP?", this.props.validation)
+  }
+
   render() {
 
-    let auth = true; 
-    let HeaderComponents; 
-
-      if(auth === true){
-        HeaderComponents = (
-          <Switch>
-            <Route path ='/store' exact component = {null}/>
-            <Route path ='/groups' exact component = {null}/>
-            <Route path ='/gallery' exact component = {null}/>
-          </Switch>
-        ); 
-      }else {
-        HeaderComponents = <Redirect to ="/register"/>
-      }
-     
     return (
       <BrowserRouter>
         <div className="App">
-          <Header />
-         <Route path ="/" exact component = {Body}/>
-          {HeaderComponents}
-         <Route path ="/register" exact component = {Register}/>   
+          <Route path="/" exact component={Body} />
+          {this.props.validation ?
+            <React.Fragment>
+              <Header/>
+              <Switch>
+                <Route path='/features' exact component={Features}/>
+              </Switch>
+            </React.Fragment>
+            : <Redirect to="/register" />
+          }
+          <Route path="/register" exact component={Register} />
         </div>
       </BrowserRouter>
     );
@@ -39,9 +40,9 @@ class App extends Component {
 
 const mapStateToProps = state => {
 
-  return{
+  return {
 
-    auth : state.auth
+    validation: state.validation,
 
   }
 
@@ -49,7 +50,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 
-  
+  return {
+    id: null,
+  }
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

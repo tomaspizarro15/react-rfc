@@ -4,7 +4,7 @@ const inicialState = {
 
     counter: 0,
     results: [],
-    validation : false,  
+    validation : true,  
 
 }
 const reducer = (state = inicialState, action) => {
@@ -13,11 +13,11 @@ const reducer = (state = inicialState, action) => {
         case validation.VALIDATE_USER : 
        
         return { validation : true};
-        console.log(validation)
+        
         case validation.INVALIDATE_USER : 
       
         return {validation : false} 
-        console.log(validation)
+        
         
     }
       

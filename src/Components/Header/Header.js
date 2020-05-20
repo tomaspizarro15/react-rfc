@@ -36,12 +36,13 @@ class Header extends Component {
             const headerArray = []
             for(let id in headerTools){
 
-              headerTools[id].href = "/"
+              headerArray.push(
+                  {href : headerTools[id].href}
+              )
                 
             }
 
         }
-        console.log(headerTools)
 
         for (let id in this.state.headerTools) {
 

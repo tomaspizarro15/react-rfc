@@ -5,6 +5,7 @@ import Fields from "./RegisterForm";
 import { connect } from "react-redux";
 import RegisterInfo from "./RegisterInfo";
 import * as validation from './../../../../Redux/Validation/ValidationActions';
+import { Redirect } from "react-router-dom";
 
 
 class Register extends PureComponent {
@@ -106,6 +107,8 @@ class Register extends PureComponent {
             },
         },
 
+        validation: false,
+
     }
 
     componentDidMount() {
@@ -120,7 +123,7 @@ class Register extends PureComponent {
     }
 
     inputChangeHandler = (event, id) => {
-
+       
         const newFields = {
             ...this.state.registerForms,
         }
@@ -144,92 +147,97 @@ class Register extends PureComponent {
 
         }
 
-        let allValidated = false;
-
-        if (newField.value !== "") {
-
-            allValidated = true;
-
-        }
+        let allValidated = true;
 
         for (let i in newFields) {
 
             allValidated = newFields[i].valid && allValidated;
 
         }
+        if (allValidated) {
 
-        console.log("ALL FORMS ARE VALIDATED?", allValidated);
+            this.setState({ validation: true })
 
-        if(allValidated){
-            this.props.validateUser(); 
-        }else {
-            this.props.invalidateUser();
+        } else {
+
+            this.setState({ validation: false })
+
         }
-
     }
-
-
-
     validateInputHandler = (id, rules, value) => {
 
         const scRegex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
         const pRegex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g;
         const eRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-
         let isValid = true;
 
         if (rules.minL) {
-
             isValid = value.length >= rules.minL && isValid;
-
         }
         if (rules.maxL) {
-
             isValid = value.length <= rules.maxL && isValid;
-
         }
         if (rules.sc) {
-            
             isValid = scRegex.test(String(value)) && isValid;
-
         }
-        if(rules.e) {
+        if (rules.e) {
             isValid = eRegex.test(String(value)) && isValid;
         }
-        if(rules.p){
+        if (rules.p) {
             isValid = pRegex.test(String(value)) && isValid;
         }
-        if(rules.match){
-            isValid =  value === this.state.registerForms.password.value && isValid; 
-        }  
-        
-            return isValid
+        if (rules.match) {
+            isValid = value === this.state.registerForms.password.value && isValid;
+        }
+        return isValid
+    }
 
-        
+    postRegisterHandler = (values) => {
+
+        console.log(values)
+        axios.post('/users.json', values)
+            .then(response => console.log(response))
+            .then(console.log("Axios request sended"))
+            .then(this.props.validateUser)
+            .catch(error => console.log("something went wrong", error))
+
     }
 
     submitRegisterHandler = (event) => {
 
         event.preventDefault();
 
-        const user = { ...this.state.registerForms };
-        const values = [];
+        let formValue = {};
 
-        for (let id in user) {
-
-            values[id] = user[id].value
+        for (let i in this.state.registerForms) {
+            formValue[i] = this.state.registerForms[i].value;
         }
 
+        console.log(formValue)
+
+        if (this.state.validation) {
+
+            this.postRegisterHandler(formValue);
+
+
+
+        }
     }
     render() {
-
-
         let registerButtonClass = 'register_button';
         let invalidFormAlert;
+        let redirect; 
+
+        if(this.props.validation){
+
+            redirect = (
+                <Redirect to ="/"/>
+            )
+
+        }else null; 
 
         let rForms = [];
-        if (this.props.validation) {
+        if (this.state.validation) {
 
             registerButtonClass = 'register_button enabled'
 
@@ -242,14 +250,14 @@ class Register extends PureComponent {
             })
         }
         return (
-
+            
             <div className="register_container">
-
                 <RegisterInfo />
-                <form className="register_form" onSubmit={this.submitRegisterHandler}>
-                    {rForms.map(form => {
+                <form className="register_form" onSubmit={(event) => this.submitRegisterHandler(event)}>
+                    {rForms.map((form, i) => {
                         return (
                             <Fields
+                                key={i}
                                 ph={form.placeholder}
                                 title={form.title}
                                 border={form.border}
@@ -259,9 +267,10 @@ class Register extends PureComponent {
                             />
                         )
                     })}
-                    <button type="submit" className={registerButtonClass} /* disabled = {!this.props.validation} */>Register</button>
+                    {redirect}
+                    <button type="submit" className={registerButtonClass} disabled ={!this.state.validation}>Register</button>
+                    <a href ="/login_new_user?" style ={{color : "black" , fontSize :"0.8vw"}}>i have an account</a>
                 </form>
-
             </div>
         );
     }
@@ -274,7 +283,6 @@ const mapStateToProps = state => {
     )
 }
 const mapPropsToDispatch = dispatch => {
-
     return {
         validateUser: () => dispatch({ type: validation.VALIDATE_USER }),
         invalidateUser: () => dispatch({ type: validation.INVALIDATE_USER })

@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import './Body.css'
-import Start from './StartComponent/Start';
 import { connect } from 'react-redux';
-import SCard from './StartComponent/StartCards';
-import ActionTypes from './../../Redux/Store/Actions';
-import { v4 as uuidv4 } from 'uuid';
-import HeaderTools from '../Header/HeaderTools/HeaderTools';
 import DecoMoon from './Decoration/Moon';
 import Main from './MainComponent/Main';
 class Body extends Component  {
