@@ -1,0 +1,3 @@
+Store Components to store and show products list, promotions, create new product, sell and buy product. 
+will be connected to a chart ,in the header ,so will need some redux state management, 
+will receive state form Axios(Backend) , will send state TO Axios, if the user inserts a newProduct; 

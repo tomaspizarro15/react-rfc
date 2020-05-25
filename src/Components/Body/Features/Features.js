@@ -1,24 +1,29 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
+import { BrowserRouting, Route, Switch } from 'react-router-dom';
 import './Features.css';
-import { BrowserRouter ,Route } from 'react-router-dom';
+import Store from './Str/Store';
+import Groups from './Grps/Groups';
+import Gallery from './Glry/Gallery';
+import StoreAdd from './Str/StoreCmps/StoreProducts/StoreNewProduct/StoreAdd';
 
 
 class Features extends PureComponent {
 
 
     render() {
-
         return (
-            <BrowserRouter>
                 <div className="component_container">
-                    <Route path='/features/store' component={null} />
-                    <Route path='/features/groups' component={null} />
-                    <Route path='/features/gallery' component={null} />
+                   <div className = "featured_component">
+                   <Switch>
+                        <Route path= {`/featured/store`} component={Store} />
+                        <Route path= {`/featured/groups`} component={Groups} />
+                        <Route path= {`/featured/gallery`} component={Gallery} />
+                        <Route path={`/featured/new_product`} render = {() => <StoreAdd/>}/>
+                    </Switch>
+                   </div>
                 </div>
-            </BrowserRouter>
-
-
         )
     }
 }
-export default Features; 
+export default Features;
+

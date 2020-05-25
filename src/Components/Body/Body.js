@@ -31,9 +31,7 @@ class Body extends Component  {
 
 const mapStateToProps = state => {
     return {
-        ctr: state.counter,
-        results : state.results, 
-        
+       
 
     }
 }

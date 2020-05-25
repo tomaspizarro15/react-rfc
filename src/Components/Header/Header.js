@@ -12,15 +12,15 @@ class Header extends Component {
         headerTools: {
             store: {
                 title: "Store",
-                href: "/store"
+                href: "/featured/store"
             },
             groups: {
                 title: "Groups",
-                href: "/groups"
+                href: "/featured/groups"
             },
             gallery: {
                 title: "Gallery",
-                href: "/gallery"
+                href: "/featured/gallery"
             }
         }
     }

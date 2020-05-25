@@ -7,27 +7,18 @@ import Register from './Components/Body/Forms/Register/Register';
 import { connect } from 'react-redux';
 import Features from './Components/Body/Features/Features';
 
+
 class App extends Component {
-
-  componentDidMount() {
-    console.log("IS VALIDATED IN APP?", this.props.validation)
-  }
-  componentDidUpdate() {
-    console.log("IS VALIDATED IN APP?", this.props.validation)
-  }
-
   render() {
 
     return (
       <BrowserRouter>
         <div className="App">
           <Route path="/" exact component={Body} />
+          <Route path = "/featured" render = {()=> <Features/>}/>
           {this.props.validation ?
             <React.Fragment>
-              <Header/>
-              <Switch>
-                <Route path='/features' exact component={Features}/>
-              </Switch>
+              <Header />
             </React.Fragment>
             : <Redirect to="/register" />
           }

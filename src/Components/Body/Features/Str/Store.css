@@ -1,0 +1,140 @@
+.str_main{
+    width: 98%;
+    height: 50%;
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+    color: white;
+    background-color: #2b2b2b;
+    overflow: hidden;
+}
+.str_main ul {
+    display: flex;
+    flex-direction: row;
+    color: black;
+    padding: 0;
+    height: 40vw;
+    width: 300%;
+    transition: margin-left 2000ms ease-in-out;
+}
+.str_main li {
+    text-align: center;
+    list-style: none;
+    width: 100%;
+    border-radius: 16px;
+    margin: 0 75px 0 75px;
+    background-color: white;
+}
+.str_main a {
+    width: 100%;
+}
+.str_prds_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+/*StoreProducts.js CSS MUST STAY IN Store.css. BUT SUBCOMPONENTS MUST BE DERIVED*/
+.str_prds {
+    width: 95%;
+    height: auto;
+    margin: 15px 0 0 0;
+    padding: 25px 0 25px 0;
+    background-color: white;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*SUBCOMPONENTS IN STORE COMPONENT , DERIVE THIS TO SINGLE SUB-FILES.CSS FOR EVERY BIG COMPONENT*/
+/*PRODUCTS INFO OF DISPLAYMENT*/
+.str_prds_info_container{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+    margin: 2vw 0 2vw 0;
+}
+.str_prds_info{
+    display: inline-flex;
+    justify-content: center;
+    text-indent:15px;
+    width: 80%;
+    height: 100%;
+    min-height: 40px;
+    background-color: #ccc;
+    color: #2b2b2b;
+    font-size: 2vw;
+    border-radius: 0 132px 132px 0;
+}
+/*SUBCOMPONENTS IN STORE COMPONENT , DERIVE THIS TO SINGLE SUB-FILES.CSS FOR EVERY BIG COMPONENT*/
+/*PRODUCTS SEARCH BAR*/
+.str_searcher {
+    margin: 15px 0 0 0 ;
+    width: 95%;
+    height: 20%;
+    background-color: #ccc;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 125px;
+    box-shadow: inset 0px 0px 25px -17px #2b2b2b;
+}
+.str_searcher p {
+    color: #2b2b2b;
+    font-size: 2.5vw;
+}
+.str_searcher input{
+    height: 20%;
+    width: 50%;
+    border: 4px solid transparent;
+    outline: none;
+    border-radius: 32px;
+    text-indent: 10px;
+    transition: border 400ms ease-in-out;
+}
+.str_searcher input:focus {
+    border: 4px solid rgb(219,112,147);
+    transition: border 400ms ease-in-out;
+}
+.str_searcher input:focus .glass_searcher_icon {
+    border: 0.25vw solid rgb(219,112,147);
+}
+.glass_searcher_icon {
+    margin-left: 1vw;
+    width: 1vw;
+    height: 1vw;
+    border: 0.30vw solid rgb(219,112,147);
+    border-radius: 64px;
+}
+.glass_searcher_icon_stick {
+    width: 0.35vw;
+    height: 0.65vw;
+    background-color: rgb(219,112,147);
+    margin-right: 1vw;
+    transform:translateY(0.55vw) rotate(-55deg);
+}
+/*SUBCOMPONENTS IN STORE COMPONENT , DERIVE THIS TO SINGLE SUB-FILES.CSS FOR EVERY BIG COMPONENT*/
+/*PRODUCTS LIST*/
+
+@media(max-width : 768px) {
+.str_searcher input {
+    width: 40%;
+}
+.products_list_container{
+    flex-direction: column;
+}
+.str_prds_list{
+    flex-direction: row;
+    width: 90%;
+}
+.str_prds_list li {
+    height: 40vw;
+    
+}
+.str_prds_info {
+    font-size: 12px;
+}
+}
