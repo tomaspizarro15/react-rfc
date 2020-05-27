@@ -3,21 +3,19 @@ import './../../Store.css';
 
 const ProductsList = (props) => {
 
-    console.log(props.prd)
-
-    let opacity = "1"; 
+    let opacity; 
 
     return (
 
         <div className="products_list_container">
-          {props.prd.map(product => {
+          {props.prd.map((product , i) => {
               if(product.opacity !== 1){
                   opacity = "0";
               }else {
                 opacity = "1";
               }
               return(
-              <li  style ={{opacity : opacity}}key = {product.id}>{product.name}</li>
+              <li  style ={{opacity : opacity}}key = {i}>{product.name}</li>
               )
           })}
         </div>

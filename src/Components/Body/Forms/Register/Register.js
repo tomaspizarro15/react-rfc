@@ -120,7 +120,9 @@ class Register extends PureComponent {
 
             })
             .catch(error => console.log("ERROR GETTING API RESPONES :::::>", error));
+            console.log("maxi" , this.props.maxi)
     }
+
 
     inputChangeHandler = (event, id) => {
        
@@ -200,7 +202,6 @@ class Register extends PureComponent {
             .then(console.log("Axios request sended"))
             .then(this.props.validateUser)
             .catch(error => console.log("something went wrong", error))
-
     }
 
     submitRegisterHandler = (event) => {
@@ -279,6 +280,7 @@ const mapStateToProps = state => {
     return (
         {
             validation: state.validation,
+            maxi : state.maxi,
         }
     )
 }

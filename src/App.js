@@ -6,16 +6,19 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Register from './Components/Body/Forms/Register/Register';
 import { connect } from 'react-redux';
 import Features from './Components/Body/Features/Features';
+import StoreAdd from './Components/Body/Features/Str/StoreCmps/StoreProducts/StoreNewProduct/StoreAdd';
 
 
 class App extends Component {
   render() {
+
 
     return (
       <BrowserRouter>
         <div className="App">
           <Route path="/" exact component={Body} />
           <Route path = "/featured" render = {()=> <Features/>}/>
+          <Route path={`/new_product`} render = {() => <StoreAdd/>}/>
           {this.props.validation ?
             <React.Fragment>
               <Header />
@@ -34,6 +37,7 @@ const mapStateToProps = state => {
   return {
 
     validation: state.validation,
+
 
   }
 

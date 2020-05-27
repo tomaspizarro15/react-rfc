@@ -18,7 +18,6 @@ class Features extends PureComponent {
                         <Route path= {`/featured/store`} component={Store} />
                         <Route path= {`/featured/groups`} component={Groups} />
                         <Route path= {`/featured/gallery`} component={Gallery} />
-                        <Route path={`/featured/new_product`} render = {() => <StoreAdd/>}/>
                     </Switch>
                    </div>
                 </div>

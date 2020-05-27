@@ -55,6 +55,8 @@ class Store extends Component {
     }
 
     render() {
+
+
         let cardWidth = 100 * this.state.sliderCards.length;
         return (
             <div className="str_main">

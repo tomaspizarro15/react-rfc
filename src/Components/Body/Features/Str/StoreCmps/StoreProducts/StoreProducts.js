@@ -5,6 +5,7 @@ import Lupa from '../../StoreUX/StrIcons/StrSearchLupa';
 import ProductsList from '../StoreList/ProductsList';
 
 import { BrowserRouter, Route , NavLink} from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -15,22 +16,17 @@ class StoreProducts extends PureComponent {
         searchValue: "",
 
         products: [
-            { id: 0, name: "Black Gucci Bag", price: 200, opacity: 1 },
-            { id: 1, name: "White Lacoste Shirt", price: 120, opacity: 1 },
-            { id: 2, name: "Red DC shirt", price: 70, opacity: 1 },
-            { id: 3, name: "Blue jeans", price: 35, opacity: 1 },
-            { id: 4, name: "Red Vinicio Scarf", price: 300, opacity: 1 },
-            { id: 5, name: "Green Vinicio Scarf", price: 300, opacity: 1 },
-            { id: 6, name: "Blue jeans", price: 35, opacity: 1 },
-            { id: 7, name: "Red Vinicio Scarf", price: 300, opacity: 1 },
-            { id: 8, name: "Green Vinicio Scarf", price: 300, opacity: 1 },
-            { id: 9, name: "Blue jeans", price: 35, opacity: 1 },
-            { id: 10, name: "Red Vinicio Scarf", price: 300, opacity: 1 },
+
         ],
         test: {},
 
     }
 
+    componentDidMount(){
+
+        axios.get
+
+    }
 
     render() {
 
@@ -61,7 +57,6 @@ class StoreProducts extends PureComponent {
 
         }
 
-        console.log(productsRow)
 
 
         return (
@@ -80,6 +75,7 @@ class StoreProducts extends PureComponent {
                                 <ProductsList
                                     key={i}
                                     prd={row.products}
+                                    
                                 />
                             )
                         })}
