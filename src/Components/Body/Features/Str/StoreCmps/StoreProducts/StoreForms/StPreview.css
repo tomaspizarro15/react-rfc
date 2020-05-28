@@ -41,10 +41,11 @@
     margin: 0.5vw;
     text-align: center;
     font-size: 2vw;
-    text-indent: 25px;
+    margin-left: 15px;
     color: green;
 }
 .preview_price p {
     font-size: 1.5vw;
     color: white;
+    margin-right: 15px;
 }

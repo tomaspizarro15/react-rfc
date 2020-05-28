@@ -75,7 +75,6 @@ class StoreAdd extends Component {
                 },
                 inputConfig: {
                     placeholder: "Description",
-                    value: "",
                     className: "form_field",
                 },
                 value : "", 
@@ -144,6 +143,11 @@ class StoreAdd extends Component {
         this.fileInput = React.createRef()
     }
 
+
+
+   
+
+
     submitFileHandler = (event) => {
         event.preventDefault()
         console.log("ref input created", this.fileInput.current)
@@ -151,40 +155,35 @@ class StoreAdd extends Component {
 
     inputChangeHandler = (event , id)  => {
 
+        console.log(id)
+
         const newField = {...this.state.fields[id]}
-
-        newField.value = event.target.value; 
-
         const newFields = {...this.state.fields}; 
-
+        newField.value = event.target.value; 
+       
         newFields[id] = newField; 
-
         this.setState({fields : newFields})
-
-        console.log(newField)
     }
 
     changeDivisaHandler = (event , id) => {
-
-        
+ 
         const newField = {...this.state.fields[id]}
-
-        newField.divisaValue = event.target.value; 
-
         const newFields = {...this.state.fields}; 
 
+        newField.divisaValue = event.target.value; 
         newFields[id] = newField; 
 
         this.setState({fields : newFields})
+        this.previewHandler(newFields); 
+    }
 
-        console.log(newField)
+    previewHandler = (fields) => {
+
+        
 
     }
 
     render() {
-
-        console.log("Ref created by react", this.fileInput)
-
         let productFields = [];
         let previewValues = {
             name : this.state.fields.productTitle.value, 
@@ -192,8 +191,9 @@ class StoreAdd extends Component {
             description: this.state.fields.productDescription.value,
         }; 
 
-        for (let id in this.state.fields) {
+        console.log(previewValues)
 
+        for (let id in this.state.fields) {
             productFields.push({
                 id: id,
                 header: this.state.fields[id].header,
@@ -216,10 +216,9 @@ class StoreAdd extends Component {
         return (
             <div className="new_prod_background">
                 <div className="new_prod_container">
-
                     <form>
                         <div className="new_prod_title">
-                            <h1>Create a new product</h1>
+                            <h1>New Product</h1>
                         </div>
                         <div className="new_prod_fields">
                             {productFields.map((field , i) => {
@@ -227,7 +226,7 @@ class StoreAdd extends Component {
                                     <StoreInput
                                         key={field.id}
                                         fieldProps={field}
-                                        ref={this.fileInput}
+                                        refs={this.fileInput}
                                         onClick={this.submitFileHandler}
                                         fileInput = {fileInput}
                                         change = {(event) => this.inputChangeHandler(event , field.id)}
@@ -241,6 +240,10 @@ class StoreAdd extends Component {
                         <button>Create product</button>
                     </form>
                     <StorePreview
+                        name  = {this.state.fields.productTitle.value}
+                        price = {this.state.fields.productPrice.value}
+                        divisa = {this.state.fields.productPrice.divisaValue}
+                        description ={this.state.fields.productDescription.value}
                     />
                 </div>
             </div>

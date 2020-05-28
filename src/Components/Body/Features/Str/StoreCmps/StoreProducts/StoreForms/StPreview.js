@@ -2,17 +2,20 @@ import React from 'react';
 import './StPreview.css';
 
 
-const StorePreview = () => {
+const StorePreview = (props) => {
+
+    console.log(props)
 
     return (
         <div className="new_prod_preview">
             <div className="preview_title">
-                <h1>Hey</h1>
+                <h1>{props.name}</h1>
             </div>
             <div className="preview_img"></div>
             <div className="preview_price">
-                <h1>$1200</h1>
-                <p>USD</p>
+                <h1>${props.price}</h1>
+                <div style={{ width: "90%" }}></div>
+                <p>{props.divisa}</p><p>Nuevo</p>
             </div>
         </div>
     )

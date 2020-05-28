@@ -97,6 +97,9 @@
     border-radius: 4px 4px 0 0 ;
     font-size: 2vmin;
 }
+.new_prod_fields p {
+    font-weight: bold;
+}
 .new_prod_price_container{
     display: flex;
     justify-content: center;
@@ -131,6 +134,15 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+}
+button {
+    outline: none;
+}
+button:hover{
+    cursor: pointer;
+}
+label:hover {
+    cursor: pointer;
 }
 .new_prod_container input {
     width: 50%;

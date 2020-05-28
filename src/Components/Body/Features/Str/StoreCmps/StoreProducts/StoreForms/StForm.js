@@ -16,15 +16,15 @@ const StoreForm = (props) => {
         } break;
         case 'textarea': {
             field = (
-                <textarea onChange = {props.change} value = {props.value}{...props.fieldProps.config}></textarea>
+                <textarea onKeyUp = {props.change} onChange = {props.change} value = {props.value}{...props.fieldProps.config}></textarea>
             )
         } break;
         case 'select': {
             field = (
                 <select value = {props.value} onChange = {props.change}> 
-                    {props.fieldProps.options.map(option => {
+                    {props.fieldProps.options.map((option , i) => {
                         return (
-                            <option>{option.value}</option>
+                            <option key = {i}>{option.value}</option>
                         )
                     })}
                 </select>
@@ -39,10 +39,10 @@ const StoreForm = (props) => {
             field = (
                 <div className ="new_prod_price_container">
                     <input style = {{width : "20%"}} value = {props.value}  onChange = {props.change} {...props.fieldProps.config}></input>
-                    <select value = {props.currency.value} onChange = {props.change}>
-                        {props.currency.map(currency => {
+                    <select value = {props.currency.value} onChange = {props.changeDivisa}>
+                        {props.currency.map((currency , i) => {
                             return(
-                            <option>{currency.value}</option>
+                            <option key = {i}>{currency.value}</option>
                             )
                         })}
                     </select>
