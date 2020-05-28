@@ -16,7 +16,18 @@ class StoreProducts extends PureComponent {
         searchValue: "",
 
         products: [
-
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
+            {id : "1" , opacity  : 1},
         ],
         test: {},
 

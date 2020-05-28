@@ -17,3 +17,8 @@
     border-radius: 4px}
 .featured_component h1 {
 }
+@media(max-width : 768px) {
+    .featured_component {
+        margin-top: 12.5vw;
+    }
+}

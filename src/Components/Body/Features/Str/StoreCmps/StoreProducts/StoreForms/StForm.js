@@ -54,7 +54,7 @@ const StoreForm = (props) => {
 
     return (
         <React.Fragment>
-            <p style={{ fontSize: "1vw" , margin :"0.65vw" }}>{props.fieldProps.header}</p>
+            <p>{props.fieldProps.header}</p>
             {field}
         </React.Fragment>
     );

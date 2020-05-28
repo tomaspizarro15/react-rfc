@@ -25,6 +25,31 @@ class StoreAdd extends Component {
 
 
             },
+            productPrice: {
+                type: "price",
+                header: "Product Price",
+                validation: {
+                    required: true,
+                    minL: 4,
+                    maxL: 16,
+                },
+                currencyOptions: [
+                    { value: "USD" },
+                    { value: "€" },
+                    { value: "ARG" },
+                    { value: "CLP" },
+                    { value: "R$" }
+                ],
+                inputConfig: {
+                    placeholder: "Price",
+                    type: "number",
+                    className: "form_field",
+                },
+                value: 0,
+                divisaValue: "USD",
+
+
+            },
             productImg: {
                 type: "file",
                 header: "Images for the product",
@@ -36,48 +61,43 @@ class StoreAdd extends Component {
                     type: "file",
                     className: "form_field_label",
                 },
-                value: "",
+                value: "Place an image",
 
 
             },
-            productPrice: {
-                type: "price",
-                header: "Product Price",
+            productStock: {
+                type: "input",
+                header: "Product Stock Quantity",
                 validation: {
                     required: true,
-                    minL: 4,
-                    maxL: 16,
                 },
-                currencyOptions : [
-                    {value : "ARG"},
-                    {value : "€"},
-                    {value : "USD"},
-                    {value : "CLP"},
-                    {value : "R$"}
-                ],
                 inputConfig: {
-                    placeholder: "Price",
+                    placeholder: "Stock",
                     type: "number",
                     className: "form_field",
                 },
                 value: 0,
-                divisaValue : "",
-
-
             },
-            productDescription: {
-                type: "textarea",
-                header: "Small Description of the product",
-                validation: {
-                    required: true,
-                    minL: 4,
-                    maxL: 128,
-                },
+            productColor: {
+                type: "select",
+                header: "Product Color",
+                validation: {},
+                options: [
+                    { value: "Black" },
+                    { value: "White" },
+                    { value: "Grey" },
+                    { value: "Yellow" },
+                    { value: "Gold" },
+                    { value: "Red" },
+                    { value: "Blue" },
+                    { value: "Pink" }
+                ],
                 inputConfig: {
-                    placeholder: "Description",
+                    placeholder: "Status",
+                    type: "",
                     className: "form_field",
                 },
-                value : "", 
+                value: "New",
             },
             productType: {
                 type: "select",
@@ -103,95 +123,81 @@ class StoreAdd extends Component {
                     type: "text",
                     className: "form_field",
                 },
-                value : "", 
+                value: "",
             },
             productStatus: {
                 type: "select",
                 header: "Product Status",
                 validation: {},
                 options: [
-                    { value: "new" },
-                    { value: "used" }
+                    { value: "New" },
+                    { value: "Used" }
                 ],
                 inputConfig: {
                     placeholder: "Status",
                     type: "",
                     className: "form_field",
                 },
-                value : "", 
+                value: "New",
             },
-            productStock: {
-                type: "input",
-                header: "Product Stock Quantity",
+            productDescription: {
+                type: "textarea",
+                header: "Small Description of the product",
                 validation: {
                     required: true,
+                    minL: 4,
+                    maxL: 128,
                 },
                 inputConfig: {
-                    placeholder: "Stock",
-                    type: "number",
+                    placeholder: "Description",
                     className: "form_field",
-                }, 
-                value : 0 , 
-            }
-        }
+                },
+                value: "",
+            },
+        },
+        imgs: [
 
+        ],
+        thumbnail: ""
     }
 
-    constructor() {
-        super()
-        this.submitFileHandler = this.submitFileHandler.bind(this);
-        this.fileInput = React.createRef()
+    componentDidUpdate() {
+
+        console.log(this.state.imgs)
+
     }
-
-
-
-   
-
-
-    submitFileHandler = (event) => {
-        event.preventDefault()
-        console.log("ref input created", this.fileInput.current)
-    }
-
-    inputChangeHandler = (event , id)  => {
+    inputChangeHandler = (event, id) => {
 
         console.log(id)
 
-        const newField = {...this.state.fields[id]}
-        const newFields = {...this.state.fields}; 
-        newField.value = event.target.value; 
-       
-        newFields[id] = newField; 
-        this.setState({fields : newFields})
+        const newField = { ...this.state.fields[id] }
+        const newFields = { ...this.state.fields };
+        newField.value = event.target.value;
+
+        newFields[id] = newField;
+        this.setState({ fields: newFields })
     }
 
-    changeDivisaHandler = (event , id) => {
- 
-        const newField = {...this.state.fields[id]}
-        const newFields = {...this.state.fields}; 
+    changeDivisaHandler = (event, id) => {
 
-        newField.divisaValue = event.target.value; 
-        newFields[id] = newField; 
+        const newField = { ...this.state.fields[id] }
+        const newFields = { ...this.state.fields };
 
-        this.setState({fields : newFields})
-        this.previewHandler(newFields); 
+        newField.divisaValue = event.target.value;
+        newFields[id] = newField;
+
+        this.setState({ fields: newFields })
     }
 
-    previewHandler = (fields) => {
+    fileHandler = (event) => {
 
-        
-
+        console.log("IMG SRC", event.target.value)
     }
 
     render() {
-        let productFields = [];
-        let previewValues = {
-            name : this.state.fields.productTitle.value, 
-            price: this.state.fields.productPrice.value,
-            description: this.state.fields.productDescription.value,
-        }; 
+        const productFields = [];
 
-        console.log(previewValues)
+
 
         for (let id in this.state.fields) {
             productFields.push({
@@ -201,14 +207,13 @@ class StoreAdd extends Component {
                 config: { ...this.state.fields[id].inputConfig },
                 value: this.state.fields[id].value,
                 options: this.state.fields[id].options,
-                currency : this.state.fields[id].currencyOptions,
+                currency: this.state.fields[id].currencyOptions,
             })
         }
-
         let fileInput = (
             <div>
-                <label  style={{ width: "2vw" , border : "2px solid #aaa" , padding : "0.40vw 2vw 0.40vw 2vw" , borderRadius :"16px" ,background :"#2b2b2b" , color :"#ffffff" ,border : "none"}}>Add Images
-                  <input ref={this.fileInput} style={{ opacity : 0 , width :"0" , height : "0"}} type="file"></input>
+                <label>Add Images
+                  <input ref={this.fileInput} style={{ opacity: 0, width: "0", height: "0" }} type="file" onChange={(event) => this.fileHandler(event)}></input>
                 </label>
             </div>
         )
@@ -221,18 +226,18 @@ class StoreAdd extends Component {
                             <h1>New Product</h1>
                         </div>
                         <div className="new_prod_fields">
-                            {productFields.map((field , i) => {
+                            {productFields.map((field, i) => {
                                 return (
                                     <StoreInput
                                         key={field.id}
                                         fieldProps={field}
                                         refs={this.fileInput}
                                         onClick={this.submitFileHandler}
-                                        fileInput = {fileInput}
-                                        change = {(event) => this.inputChangeHandler(event , field.id)}
-                                        value = {field.value}
-                                        currency = {field.currency}
-                                        changeDivisa = {(event) => this.changeDivisaHandler(event , field.id)}
+                                        fileInput={fileInput}
+                                        change={(event) => this.inputChangeHandler(event, field.id)}
+                                        value={field.value}
+                                        currency={field.currency}
+                                        changeDivisa={(event) => this.changeDivisaHandler(event, field.id)}
                                     />
                                 )
                             })}
@@ -240,10 +245,12 @@ class StoreAdd extends Component {
                         <button>Create product</button>
                     </form>
                     <StorePreview
-                        name  = {this.state.fields.productTitle.value}
-                        price = {this.state.fields.productPrice.value}
-                        divisa = {this.state.fields.productPrice.divisaValue}
-                        description ={this.state.fields.productDescription.value}
+                        name={this.state.fields.productTitle.value}
+                        price={this.state.fields.productPrice.value}
+                        divisa={this.state.fields.productPrice.divisaValue}
+                        description={this.state.fields.productDescription.value}
+                        status={this.state.fields.productStatus.value}
+                        imgs={this.state.thumbnail}
                     />
                 </div>
             </div>
