@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './../StoreProducts.css';
 import StoreInput from '../StoreForms/StForm';
 import axios from './../../../../../../../Axios/AxiosProducts';
+import StorePreview from '../StoreForms/StPreview';
 
 class StoreAdd extends Component {
 
@@ -25,34 +26,42 @@ class StoreAdd extends Component {
 
             },
             productImg: {
-                type: "input",
+                type: "file",
                 header: "Images for the product",
                 validation: {
                     required: false,
                 },
                 inputConfig: {
                     placeholder: "Image of product",
-                    type: "image",
-                    className: "form_field_img",
+                    type: "file",
+                    className: "form_field_label",
                 },
                 value: "",
 
 
             },
             productPrice: {
-                type: "input",
+                type: "price",
                 header: "Product Price",
                 validation: {
                     required: true,
                     minL: 4,
                     maxL: 16,
                 },
+                currencyOptions : [
+                    {value : "ARG"},
+                    {value : "€"},
+                    {value : "USD"},
+                    {value : "CLP"},
+                    {value : "R$"}
+                ],
                 inputConfig: {
-                    placeholder: "Price of product",
+                    placeholder: "Price",
                     type: "number",
                     className: "form_field",
                 },
-                value: "",
+                value: 0,
+                divisaValue : "",
 
 
             },
@@ -69,6 +78,7 @@ class StoreAdd extends Component {
                     value: "",
                     className: "form_field",
                 },
+                value : "", 
             },
             productType: {
                 type: "select",
@@ -85,27 +95,31 @@ class StoreAdd extends Component {
                     { value: "glasses" },
                     { value: "watch" },
                     { value: "chain" },
-                    { value: "wp" }
+                    { value: "rings" },
+                    { value: "earrings" },
+                    { value: "others" },
                 ],
                 inputConfig: {
                     placeholder: "Type of product",
                     type: "text",
                     className: "form_field",
                 },
-                value: "",
-
-
+                value : "", 
             },
             productStatus: {
                 type: "select",
                 header: "Product Status",
                 validation: {},
+                options: [
+                    { value: "new" },
+                    { value: "used" }
+                ],
                 inputConfig: {
                     placeholder: "Status",
                     type: "",
                     className: "form_field",
                 },
-                value: "",
+                value : "", 
             },
             productStock: {
                 type: "input",
@@ -117,15 +131,66 @@ class StoreAdd extends Component {
                     placeholder: "Stock",
                     type: "number",
                     className: "form_field",
-
-                }
+                }, 
+                value : 0 , 
             }
         }
 
     }
+
+    constructor() {
+        super()
+        this.submitFileHandler = this.submitFileHandler.bind(this);
+        this.fileInput = React.createRef()
+    }
+
+    submitFileHandler = (event) => {
+        event.preventDefault()
+        console.log("ref input created", this.fileInput.current)
+    }
+
+    inputChangeHandler = (event , id)  => {
+
+        const newField = {...this.state.fields[id]}
+
+        newField.value = event.target.value; 
+
+        const newFields = {...this.state.fields}; 
+
+        newFields[id] = newField; 
+
+        this.setState({fields : newFields})
+
+        console.log(newField)
+    }
+
+    changeDivisaHandler = (event , id) => {
+
+        
+        const newField = {...this.state.fields[id]}
+
+        newField.divisaValue = event.target.value; 
+
+        const newFields = {...this.state.fields}; 
+
+        newFields[id] = newField; 
+
+        this.setState({fields : newFields})
+
+        console.log(newField)
+
+    }
+
     render() {
 
+        console.log("Ref created by react", this.fileInput)
+
         let productFields = [];
+        let previewValues = {
+            name : this.state.fields.productTitle.value, 
+            price: this.state.fields.productPrice.value,
+            description: this.state.fields.productDescription.value,
+        }; 
 
         for (let id in this.state.fields) {
 
@@ -135,31 +200,48 @@ class StoreAdd extends Component {
                 type: this.state.fields[id].type,
                 config: { ...this.state.fields[id].inputConfig },
                 value: this.state.fields[id].value,
-                options: this.state.fields[id].options
+                options: this.state.fields[id].options,
+                currency : this.state.fields[id].currencyOptions,
             })
         }
+
+        let fileInput = (
+            <div>
+                <label  style={{ width: "2vw" , border : "2px solid #aaa" , padding : "0.40vw 2vw 0.40vw 2vw" , borderRadius :"16px" ,background :"#2b2b2b" , color :"#ffffff" ,border : "none"}}>Add Images
+                  <input ref={this.fileInput} style={{ opacity : 0 , width :"0" , height : "0"}} type="file"></input>
+                </label>
+            </div>
+        )
 
         return (
             <div className="new_prod_background">
                 <div className="new_prod_container">
+
                     <form>
-                        <div className ="new_prod_title">
+                        <div className="new_prod_title">
                             <h1>Create a new product</h1>
                         </div>
-                        <div className ="new_prod_fields">
-                            {productFields.map(field => {
+                        <div className="new_prod_fields">
+                            {productFields.map((field , i) => {
                                 return (
                                     <StoreInput
                                         key={field.id}
                                         fieldProps={field}
+                                        ref={this.fileInput}
+                                        onClick={this.submitFileHandler}
+                                        fileInput = {fileInput}
+                                        change = {(event) => this.inputChangeHandler(event , field.id)}
+                                        value = {field.value}
+                                        currency = {field.currency}
+                                        changeDivisa = {(event) => this.changeDivisaHandler(event , field.id)}
                                     />
                                 )
                             })}
                         </div>
                         <button>Create product</button>
                     </form>
-                    <div className="new_prod_preview">
-                    </div>
+                    <StorePreview
+                    />
                 </div>
             </div>
         )

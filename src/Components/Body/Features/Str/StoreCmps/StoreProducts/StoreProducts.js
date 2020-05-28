@@ -4,7 +4,7 @@ import './StoreProducts.css'
 import Lupa from '../../StoreUX/StrIcons/StrSearchLupa';
 import ProductsList from '../StoreList/ProductsList';
 
-import { BrowserRouter, Route , NavLink} from 'react-router-dom';
+import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -22,14 +22,14 @@ class StoreProducts extends PureComponent {
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
         axios.get
 
     }
 
     render() {
-
+        let displayProduct;
         let products = [];
         let posicion = 0;
         let rows = this.state.products.length / 3;
@@ -57,7 +57,28 @@ class StoreProducts extends PureComponent {
 
         }
 
-
+        if (productsRow.length !== 0) {
+            console.log("Products found")
+            displayProduct = (
+                <div className="str_prds_list">
+                    {productsRow.map((row, i) => {
+                        return (
+                            <ProductsList
+                                key={i}
+                                prd={row.products}
+                            />
+                        )
+                    })}
+                </div>
+            )
+        } else {
+            console.log("No products find")
+            displayProduct = (
+                <div className="str_prds_alert">
+                    <h1>No products found...</h1>
+                </ div>
+            )
+        }
 
         return (
             <div className="str_prds_container">
@@ -69,19 +90,9 @@ class StoreProducts extends PureComponent {
                         <div className="str_prds_info">
                         </div>
                     </div>
-                    <div className="str_prds_list">
-                        {productsRow.map((row, i) => {
-                            return (
-                                <ProductsList
-                                    key={i}
-                                    prd={row.products}
-                                    
-                                />
-                            )
-                        })}
-                    </div>
+                    {displayProduct}
                     <div className="store_add_cpm">
-                        <NavLink to="/featured/new_product">+</NavLink>
+                        <NavLink to="/new_product">+</NavLink>
                     </div>
                 </div>
             </div>
