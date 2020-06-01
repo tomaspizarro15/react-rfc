@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import './Register.css';
-import axios from './../../../../Axios/AxiosInstance01';
+import axios from '../../../Axios/Instances/UserInstance';
 import Fields from "./RegisterForm";
 import { connect } from "react-redux";
 import RegisterInfo from "./RegisterInfo";

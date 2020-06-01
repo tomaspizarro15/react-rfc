@@ -3,11 +3,6 @@ import './StPreview.css';
 
 
 const StorePreview = (props) => {
-
-    console.log(props.imgs[0])
-
-
-
     return (
         <div className="new_prod_preview">
             <div className="preview_title">

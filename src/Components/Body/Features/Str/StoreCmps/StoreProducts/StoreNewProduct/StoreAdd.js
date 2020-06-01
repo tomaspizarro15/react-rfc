@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './../StoreProducts.css';
 import StoreInput from '../StoreForms/StForm';
-import axios from './../../../../../../../Axios/AxiosProducts';
+import axios from '../../../../../../Axios/Instances/ProductInstance';
 import StorePreview from '../StoreForms/StPreview';
+import postProduct from '../../../../../../Axios/Actions/Post/PostProduct';
 
 class StoreAdd extends Component {
 
@@ -160,15 +161,7 @@ class StoreAdd extends Component {
         ],
         thumbnail: ""
     }
-
-    componentDidUpdate() {
-
-        console.log(this.state.imgs)
-
-    }
     inputChangeHandler = (event, id) => {
-
-        console.log(id)
 
         const newField = { ...this.state.fields[id] }
         const newFields = { ...this.state.fields };
@@ -193,6 +186,26 @@ class StoreAdd extends Component {
 
         console.log("IMG SRC", event.target.value)
     }
+
+    validationHandler = () => {
+
+        
+
+    } 
+
+    submitHandler = (event) => {
+
+        event.preventDefault(); 
+
+        for(let id in this.state.fields){
+
+            console.log("Finded Values" , this.state.fields[id].value)
+
+        }
+
+    }
+
+
 
     render() {
         const productFields = [];
@@ -221,7 +234,7 @@ class StoreAdd extends Component {
         return (
             <div className="new_prod_background">
                 <div className="new_prod_container">
-                    <form>
+                    <form onSubmit = {(event) => this.submitHandler(event)}>
                         <div className="new_prod_title">
                             <h1>New Product</h1>
                         </div>
@@ -242,7 +255,7 @@ class StoreAdd extends Component {
                                 )
                             })}
                         </div>
-                        <button>Create product</button>
+                        <button type = "submit">Create product</button>
                     </form>
                     <StorePreview
                         name={this.state.fields.productTitle.value}

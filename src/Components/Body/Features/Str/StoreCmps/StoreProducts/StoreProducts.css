@@ -58,7 +58,7 @@
     } 
     .products_list_container{
         width: 100%;
-    }
+    }                                                                   
 }
 
 /* STORE ADDING PRODUCT STYLING */
@@ -214,14 +214,17 @@ label:hover {
 
     }
     .new_prod_container form{
-        width:100%;;
+        width:95%;
+        height: 100%;
+        padding: 10px;
     }
     .new_prod_container p {
-        font-size: 15px;
+        font-size: 12px;
         margin: 5px;
     }
     .new_prod_container button {
         font-size: 12px;
+        margin-top: 5px;
     }
     .new_prod_container label {
         font-size: 12px;
@@ -231,9 +234,22 @@ label:hover {
     }
     .new_prod_container textarea {
         width: 50%;
-        height: 25px;
+        height: 30px;
     }
     .new_prod_container select {
+        width: 25%;
+        height:auto;
+        font-size: 10px;
+        font-weight: bold;
+    }
+    .new_prod_container input {
+        height: 12px;
         width: 40%;
+    }
+    .new_prod_title {
+        height: 0;
+        width: 0;
+        visibility: none;
+        color : transparent;
     }
 }
