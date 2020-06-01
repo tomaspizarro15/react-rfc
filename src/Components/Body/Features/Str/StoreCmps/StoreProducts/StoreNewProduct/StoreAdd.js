@@ -3,7 +3,7 @@ import './../StoreProducts.css';
 import StoreInput from '../StoreForms/StForm';
 import axios from '../../../../../../Axios/Instances/ProductInstance';
 import StorePreview from '../StoreForms/StPreview';
-import postProduct from '../../../../../../Axios/Actions/Post/PostProduct';
+import * as Api from '../../../../../../Axios/Actions/Post/api';
 
 class StoreAdd extends Component {
 
@@ -98,7 +98,7 @@ class StoreAdd extends Component {
                     type: "",
                     className: "form_field",
                 },
-                value: "New",
+                value: "Black",
             },
             productType: {
                 type: "select",
@@ -124,7 +124,7 @@ class StoreAdd extends Component {
                     type: "text",
                     className: "form_field",
                 },
-                value: "",
+                value: "Shoes",
             },
             productStatus: {
                 type: "select",
@@ -156,9 +156,6 @@ class StoreAdd extends Component {
                 value: "",
             },
         },
-        imgs: [
-
-        ],
         thumbnail: ""
     }
     inputChangeHandler = (event, id) => {
@@ -193,15 +190,20 @@ class StoreAdd extends Component {
 
     } 
 
+
+
+
     submitHandler = (event) => {
 
-        event.preventDefault(); 
+        const productPost = {}
 
+        event.preventDefault();
+    
         for(let id in this.state.fields){
-
-            console.log("Finded Values" , this.state.fields[id].value)
-
+           productPost[id] =  this.state.fields[id].value
         }
+
+        Api.apiInstance.post("products",productPost);
 
     }
 
@@ -209,9 +211,6 @@ class StoreAdd extends Component {
 
     render() {
         const productFields = [];
-
-
-
         for (let id in this.state.fields) {
             productFields.push({
                 id: id,
