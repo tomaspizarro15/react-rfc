@@ -3,7 +3,7 @@ import './../StoreProducts.css';
 import StoreInput from '../StoreForms/StForm';
 import axios from '../../../../../../Axios/Instances/ProductInstance';
 import StorePreview from '../StoreForms/StPreview';
-import * as Api from '../../../../../../Axios/Actions/Post/api';
+import * as Api from '../../../../../../Axios/Actions/Service/api';
 
 class StoreAdd extends Component {
 
@@ -186,12 +186,7 @@ class StoreAdd extends Component {
 
     validationHandler = () => {
 
-        
-
     } 
-
-
-
 
     submitHandler = (event) => {
 
@@ -202,14 +197,15 @@ class StoreAdd extends Component {
         for(let id in this.state.fields){
            productPost[id] =  this.state.fields[id].value
         }
-
         Api.apiInstance.post("products",productPost);
-
     }
 
 
 
     render() {
+
+  
+
         const productFields = [];
         for (let id in this.state.fields) {
             productFields.push({

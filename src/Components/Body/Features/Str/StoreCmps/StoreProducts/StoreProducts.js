@@ -1,71 +1,57 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import './../../Store.css';
 import './StoreProducts.css'
 import Lupa from '../../StoreUX/StrIcons/StrSearchLupa';
 import ProductsList from '../StoreList/ProductsList';
 
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
-import axios from 'axios';
+import * as Api from '../../../../../Axios/Actions/Service/api';
 
 
 
-class StoreProducts extends PureComponent {
+class StoreProducts extends Component {
 
     state = {
         productsQT: 0,
         searchValue: "",
-
-        products: [
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-            {id : "1" , opacity  : 1},
-        ],
+        products: [],
         test: {},
-
     }
 
     componentDidMount() {
 
-        axios.get
+        Api.apiInstance.get("products").then(data => this.setState({ test: data }))
+        console.log("State Mounted [StoreProducts.js]" , this.state.test)
+    }
+
+    componentDidUpdate() {
+
+        console.log("State Updated [StoreProducts.js]" ,this.state.test)
 
     }
 
     render() {
+
+        console.log("Rendered") 
         let displayProduct;
         let products = [];
         let posicion = 0;
-        let rows = this.state.products.length / 3;
+        let rows = this.state.products.test / 3;
         rows = Math.ceil(rows);
-
         const productsRow = [];
 
-
         for (let i = 0; i < rows; i++) {
-
-
             for (let j = 0; j < 3; j++) {
                 products.push({
                     id: i,
-                    ...this.state.products[posicion]
+                    ...this.state.test[posicion]
                 })
                 posicion++;
             }
-
             productsRow[i] = {
                 products,
             }
-
             products = [];
-
         }
 
         if (productsRow.length !== 0) {
@@ -86,14 +72,13 @@ class StoreProducts extends PureComponent {
             console.log("No products find")
             displayProduct = (
                 <div className="str_prds_alert">
-                    <h1>No products found...</h1>
                 </ div>
             )
         }
-
         return (
             <div className="str_prds_container">
                 <div className="str_prds">
+                    <button onClick={this.recieveProductsHandler}>Testing http</button>
                     <div className="str_searcher">
                         <p>Search for products</p><Lupa /><input type="text"></input>
                     </div>
