@@ -1,97 +1,102 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import './../../Store.css';
 import './StoreProducts.css'
 import Lupa from '../../StoreUX/StrIcons/StrSearchLupa';
-import ProductsList from '../StoreList/ProductsList';
-
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import * as Api from '../../../../../Axios/Actions/Service/api';
 
 
 
-class StoreProducts extends Component {
+class StoreProducts extends PureComponent {
 
     state = {
-        productsQT: 0,
-        searchValue: "",
-        products: [],
-        test: {},
+        prods: {},
+        prodsList: [],
     }
 
     componentDidMount() {
+        Api.apiInstance.get("products").then(data => this.setState({ prods: data }))
+        console.log("State Mounted [StoreProducts.js]")
 
-        Api.apiInstance.get("products").then(data => this.setState({ test: data }))
-        console.log("State Mounted [StoreProducts.js]" , this.state.test)
+        this.displayHandler(this.state.prods);
     }
 
     componentDidUpdate() {
+        console.log("Backend received products", this.state.prods)
+        console.log("State Updated [StoreProducts.js]", this.state.prodsList)
 
-        console.log("State Updated [StoreProducts.js]" ,this.state.test)
+
+    }
+
+    displayHandler = () => {
+
+        let newProducts = [];
+        for (let id in this.state.prods) {
+            console.log("backend prods iterations")
+            newProducts.push({
+                id: id,
+                ...this.state.prods[id],
+            })
+        }
+
+        return (newProducts)
 
     }
 
     render() {
 
-        console.log("Rendered") 
-        let displayProduct;
-        let products = [];
-        let posicion = 0;
-        let rows = this.state.products.test / 3;
-        rows = Math.ceil(rows);
-        const productsRow = [];
+        const products = this.displayHandler();
+        console.log(products)
+        let ComponentDisplay;
+        if (products.length === 0) {
 
-        for (let i = 0; i < rows; i++) {
-            for (let j = 0; j < 3; j++) {
-                products.push({
-                    id: i,
-                    ...this.state.test[posicion]
-                })
-                posicion++;
-            }
-            productsRow[i] = {
-                products,
-            }
-            products = [];
-        }
+            ComponentDisplay = (
 
-        if (productsRow.length !== 0) {
-            console.log("Products found")
-            displayProduct = (
-                <div className="str_prds_list">
-                    {productsRow.map((row, i) => {
-                        return (
-                            <ProductsList
-                                key={i}
-                                prd={row.products}
-                            />
-                        )
-                    })}
+                <div className="str_prds_alert">
+                    <h1>No Products match your search</h1>
+                </div>
+
+            )
+
+        } else {
+
+            ComponentDisplay = (
+                <div className ="products_list">
+                    <ol className="products_ol">
+                        {products.map(product => {
+                            return (
+                                <li key={product}>
+                                    {product.id}
+                                </li>
+                            )
+                        })}
+                    </ol>
                 </div>
             )
-        } else {
-            console.log("No products find")
-            displayProduct = (
-                <div className="str_prds_alert">
-                </ div>
-            )
         }
+
         return (
-            <div className="str_prds_container">
-                <div className="str_prds">
-                    <button onClick={this.recieveProductsHandler}>Testing http</button>
-                    <div className="str_searcher">
+            <div className="products_container">
+                <div className="products">
+                    <div className="products_search">
                         <p>Search for products</p><Lupa /><input type="text"></input>
                     </div>
-                    <div className="str_prds_info_container">
-                        <div className="str_prds_info">
+                    <div className="products_info">
+                    </div>
+                    {ComponentDisplay}
+                    <div className="products_ui">
+                        <div className="products_add">
+                            <NavLink to="/new_product">+</NavLink>
+                        </div>
+                        <div className="products_toggle">
+
                         </div>
                     </div>
-                    {displayProduct}
-                    <div className="store_add_cpm">
-                        <NavLink to="/new_product">+</NavLink>
-                    </div>
+
                 </div>
+
             </div>
+
         );
     }
 

@@ -1,1 +1,0 @@
-this file will be created and will show / manage the products , the search results, and the option of adding new products to the list; 
