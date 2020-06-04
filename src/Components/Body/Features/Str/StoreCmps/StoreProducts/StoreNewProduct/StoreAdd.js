@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './../StoreProducts.css';
 import StoreInput from '../StoreForms/StForm';
 import axios from '../../../../../../Axios/Instances/ProductInstance';
-import StorePreview from '../StoreForms/StPreview';
+import StorePreview from './StPreview';
 import * as Api from '../../../../../../Axios/Actions/Service/api';
 
 class StoreAdd extends Component {
@@ -27,29 +27,19 @@ class StoreAdd extends Component {
 
             },
             productPrice: {
-                type: "price",
+                type: "input",
                 header: "Product Price",
                 validation: {
                     required: true,
                     minL: 4,
                     maxL: 16,
                 },
-                currencyOptions: [
-                    { value: "USD" },
-                    { value: "€" },
-                    { value: "ARG" },
-                    { value: "CLP" },
-                    { value: "R$" }
-                ],
                 inputConfig: {
                     placeholder: "Price",
                     type: "number",
                     className: "form_field",
                 },
                 value: 0,
-                divisaValue: "USD",
-
-
             },
             productImg: {
                 type: "file",
@@ -156,10 +146,9 @@ class StoreAdd extends Component {
                 value: "",
             },
         },
-        thumbnail: ""
+
     }
     inputChangeHandler = (event, id) => {
-
         const newField = { ...this.state.fields[id] }
         const newFields = { ...this.state.fields };
         newField.value = event.target.value;
@@ -168,32 +157,12 @@ class StoreAdd extends Component {
         this.setState({ fields: newFields })
     }
 
-    changeDivisaHandler = (event, id) => {
-
-        const newField = { ...this.state.fields[id] }
-        const newFields = { ...this.state.fields };
-
-        newField.divisaValue = event.target.value;
-        newFields[id] = newField;
-
-        this.setState({ fields: newFields })
-    }
-
     fileHandler = (event) => {
-
         console.log("IMG SRC", event.target.value)
     }
-
-    validationHandler = () => {
-
-    } 
-
     submitHandler = (event) => {
-
         const productPost = {}
-
         event.preventDefault();
-    
         for(let id in this.state.fields){
            productPost[id] =  this.state.fields[id].value
         }
@@ -203,9 +172,6 @@ class StoreAdd extends Component {
 
 
     render() {
-
-  
-
         const productFields = [];
         for (let id in this.state.fields) {
             productFields.push({

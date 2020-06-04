@@ -4,6 +4,8 @@ import './StoreProducts.css'
 import Lupa from '../../StoreUX/StrIcons/StrSearchLupa';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import * as Api from '../../../../../Axios/Actions/Service/api';
+import ProductList from './ProductList/ProductList';
+import ProductSearcher from './ProductSearcher/ProductSearcher';
 
 
 
@@ -46,13 +48,14 @@ class StoreProducts extends PureComponent {
     render() {
 
         const products = this.displayHandler();
+
         console.log(products)
         let ComponentDisplay;
         if (products.length === 0) {
 
             ComponentDisplay = (
 
-                <div className="str_prds_alert">
+                <div className="products_alert">
                     <h1>No Products match your search</h1>
                 </div>
 
@@ -61,13 +64,20 @@ class StoreProducts extends PureComponent {
         } else {
 
             ComponentDisplay = (
-                <div className ="products_list">
+                <div className="products_list">
                     <ol className="products_ol">
                         {products.map(product => {
                             return (
-                                <li key={product}>
-                                    {product.id}
-                                </li>
+                              <ProductList
+                                key = {product.id}
+                                id = {product.id}
+                                name = {product.productTitle}
+                                price = {product.productPrice}
+                                color = {product.productColor}
+                                status = {product.productStatus}
+                                type = {product.productType}
+                                description ={product.productDescription}
+                              />
                             )
                         })}
                     </ol>
@@ -78,21 +88,13 @@ class StoreProducts extends PureComponent {
         return (
             <div className="products_container">
                 <div className="products">
-                    <div className="products_search">
-                        <p>Search for products</p><Lupa /><input type="text"></input>
-                    </div>
+                    <ProductSearcher/>
                     <div className="products_info">
                     </div>
                     {ComponentDisplay}
-                    <div className="products_ui">
                         <div className="products_add">
                             <NavLink to="/new_product">+</NavLink>
                         </div>
-                        <div className="products_toggle">
-
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
