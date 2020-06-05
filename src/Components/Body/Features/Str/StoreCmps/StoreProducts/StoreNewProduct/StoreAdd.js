@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './../StoreProducts.css';
-import StoreInput from '../StoreForms/StForm';
+import StoreForm from '../StoreForms/StForm';
 import axios from '../../../../../../Axios/Instances/ProductInstance';
 import StorePreview from './StPreview';
 import * as Api from '../../../../../../Axios/Actions/Service/api';
-
+import * as Regex from './../../../../../../Regex/Regex';
 class StoreAdd extends Component {
 
     state = {
@@ -16,6 +16,7 @@ class StoreAdd extends Component {
                     required: true,
                     minL: 4,
                     maxL: 16,
+                    special: true,
                 },
                 inputConfig: {
                     placeholder: "Name / Title",
@@ -23,6 +24,7 @@ class StoreAdd extends Component {
                     className: "form_field",
                 },
                 value: "",
+                validated : false, 
 
 
             },
@@ -31,8 +33,8 @@ class StoreAdd extends Component {
                 header: "Product Price",
                 validation: {
                     required: true,
-                    minL: 4,
-                    maxL: 16,
+                    minL: 1,
+                    maxL: 8,
                 },
                 inputConfig: {
                     placeholder: "Price",
@@ -40,6 +42,7 @@ class StoreAdd extends Component {
                     className: "form_field",
                 },
                 value: 0,
+                validated : false, 
             },
             productImg: {
                 type: "file",
@@ -53,14 +56,14 @@ class StoreAdd extends Component {
                     className: "form_field_label",
                 },
                 value: "Place an image",
-
-
+                validated : true, 
             },
             productStock: {
                 type: "input",
                 header: "Product Stock Quantity",
                 validation: {
                     required: true,
+                    special: true,
                 },
                 inputConfig: {
                     placeholder: "Stock",
@@ -68,11 +71,11 @@ class StoreAdd extends Component {
                     className: "form_field",
                 },
                 value: 0,
+                validated : false, 
             },
             productColor: {
                 type: "select",
                 header: "Product Color",
-                validation: {},
                 options: [
                     { value: "Black" },
                     { value: "White" },
@@ -89,11 +92,11 @@ class StoreAdd extends Component {
                     className: "form_field",
                 },
                 value: "Black",
+                validated : true, 
             },
             productType: {
                 type: "select",
                 header: "Product type",
-                validation: {},
                 options: [
                     { value: "Shoes" },
                     { value: "Shirt" },
@@ -115,11 +118,11 @@ class StoreAdd extends Component {
                     className: "form_field",
                 },
                 value: "Shoes",
+                validated : true, 
             },
             productStatus: {
                 type: "select",
                 header: "Product Status",
-                validation: {},
                 options: [
                     { value: "New" },
                     { value: "Used" }
@@ -130,31 +133,73 @@ class StoreAdd extends Component {
                     className: "form_field",
                 },
                 value: "New",
+                validated : true, 
             },
             productDescription: {
                 type: "textarea",
                 header: "Small Description of the product",
                 validation: {
                     required: true,
-                    minL: 4,
+                    minL: 8,
                     maxL: 128,
+                    special: true,
                 },
                 inputConfig: {
                     placeholder: "Description",
                     className: "form_field",
                 },
                 value: "",
+                validated : false, 
             },
         },
-
+        formIsValid : false,
     }
     inputChangeHandler = (event, id) => {
         const newField = { ...this.state.fields[id] }
         const newFields = { ...this.state.fields };
         newField.value = event.target.value;
-
+        newField.validated = this.productValidationHandler(event, newField.validation , newField ,id)
         newFields[id] = newField;
         this.setState({ fields: newFields })
+    }
+
+    checkValidationHandler = () => {
+
+
+        const validation = []; 
+        for(let id in this.state.fields){
+
+            validation.push(
+                this.state.fields[id].validated, 
+            )
+
+        }
+
+        console.log(validation)
+
+    }
+
+    productValidationHandler = (event , validation , obj , id) => {
+        const forms = {...this.state.fields}
+        const field = {...this.state.fields[id]}
+        const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
+
+        let isValid = true; 
+    
+            if(validation.minL) {
+                isValid = obj.value.length >= validation.minL && isValid; 
+            }
+            if(validation.maxL) {
+                isValid = obj.value.length <= validation.maxL && isValid; 
+            }
+            if(validation.special){
+                isValid = regex.test(obj.value) && isValid
+            }
+
+        field.validated = isValid; 
+        forms[id] = field; 
+
+        return(isValid)
     }
 
     fileHandler = (event) => {
@@ -163,14 +208,11 @@ class StoreAdd extends Component {
     submitHandler = (event) => {
         const productPost = {}
         event.preventDefault();
-        for(let id in this.state.fields){
-           productPost[id] =  this.state.fields[id].value
+        for (let id in this.state.fields) {
+            productPost[id] = this.state.fields[id].value
         }
-        Api.apiInstance.post("products",productPost);
+        Api.apiInstance.post("products", productPost);
     }
-
-
-
     render() {
         const productFields = [];
         for (let id in this.state.fields) {
@@ -182,6 +224,7 @@ class StoreAdd extends Component {
                 value: this.state.fields[id].value,
                 options: this.state.fields[id].options,
                 currency: this.state.fields[id].currencyOptions,
+                validation : this.state.fields[id].validated,
             })
         }
         let fileInput = (
@@ -195,28 +238,28 @@ class StoreAdd extends Component {
         return (
             <div className="new_prod_background">
                 <div className="new_prod_container">
-                    <form onSubmit = {(event) => this.submitHandler(event)}>
+                    <form onSubmit={(event) => this.submitHandler(event)}>
                         <div className="new_prod_title">
                             <h1>New Product</h1>
                         </div>
                         <div className="new_prod_fields">
                             {productFields.map((field, i) => {
                                 return (
-                                    <StoreInput
+                                    <StoreForm
                                         key={field.id}
                                         fieldProps={field}
-                                        refs={this.fileInput}
                                         onClick={this.submitFileHandler}
                                         fileInput={fileInput}
                                         change={(event) => this.inputChangeHandler(event, field.id)}
                                         value={field.value}
                                         currency={field.currency}
                                         changeDivisa={(event) => this.changeDivisaHandler(event, field.id)}
+                                        validated = {field.validation}
                                     />
                                 )
                             })}
                         </div>
-                        <button type = "submit">Create product</button>
+                        <button type="submit" onClick = {this.checkValidationHandler}>Create product</button>
                     </form>
                     <StorePreview
                         name={this.state.fields.productTitle.value}

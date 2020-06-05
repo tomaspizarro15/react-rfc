@@ -4,6 +4,7 @@ import './../StoreProducts.css';
 
 const StoreForm = (props) => {
 
+    const border = "green"
     let field;
     let inputBorder = "2px solid rgb(111,0,255)"
 
@@ -38,7 +39,7 @@ const StoreForm = (props) => {
         case 'price' : {
             field = (
                 <div className ="new_prod_price_container">
-                    <input style = {{width : "20%"}} value = {props.value}  onChange = {props.change} {...props.fieldProps.config}></input>
+                    <input style = {{ border : {inputBorder} , width : "20%"}} value = {props.value}  onChange = {props.change} {...props.fieldProps.config}></input>
                     <select value = {props.currency.value} onChange = {props.changeDivisa}>
                         {props.currency.map((currency , i) => {
                             return(

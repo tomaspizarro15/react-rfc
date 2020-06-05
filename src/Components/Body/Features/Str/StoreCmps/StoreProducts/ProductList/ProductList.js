@@ -2,9 +2,6 @@ import React from 'react';
 import './ProductList.css';
 import Carrito from './../../../StoreUX/StrIcons/icono_carrito.png'
 const ProductList = (props) => {
-
-    console.log("Props in [ProductList.js]", props)
-
     return (
         <li>
             <div className="product_title">
@@ -26,7 +23,7 @@ const ProductList = (props) => {
                 <div className="product_carrito">
                     <img alt="carrito" src={Carrito}></img>
                 </div>
-                <div /*Spacer*/ style={{ width: "75%" }}></div>
+                <div /*Spacer*/ style={{ width: "12.5vw" }}></div>
                 <div className="product_info_icon">
 
                 </div>
