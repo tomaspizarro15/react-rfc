@@ -88,6 +88,7 @@
 /* STORE ADDING PRODUCT STYLING */
 .price_input {
     width: 25%;
+    height:  50%;
 }
 .store_add_cpm {
     display: flex;
