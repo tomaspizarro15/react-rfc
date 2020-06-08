@@ -1,0 +1,25 @@
+.burger_button {
+    width: 50px;
+    height: 100%;
+}
+.burger_button ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.burger_button li {
+    list-style: none;
+    width: 50%;
+    height: 4px;
+    background-color: white; 
+    transition: background-color 350ms ease-in-out;
+    margin: 2px 0 2px 0;
+}
+.burger_button :hover li {
+   background-color:  rgb(219,112,147);
+   transition: background-color 350ms ease-in-out;
+}

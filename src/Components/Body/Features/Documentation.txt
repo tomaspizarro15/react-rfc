@@ -1,0 +1,3 @@
+In this foulder all the features of the headerpage , and sidedrawers, modals will be contained.
+Classsed Component, will be derived for multiple components, 
+State managed by ClassState , not redux, charts and textInfo; 
