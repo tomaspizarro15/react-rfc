@@ -1,0 +1,28 @@
+.products_search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    background-color: #ffffff;
+    padding: 12px;
+    border-radius: 4px;
+    box-shadow: black 0px 0px 16px -5px;
+}
+.products_search p {
+    color: black;
+    font-size: 3vmin;
+    font-weight: bold;
+    margin: 1%;
+}
+.products_search input {
+    width: 35%;
+    background-color: #dddddd;
+    height: 1.5rem;
+    border-radius: 64px;
+    margin-left: 15px;
+    border: 2px solid #32ED80;
+    outline: none;
+    font-size: 2vmin;
+    text-indent: 5px;
+}

@@ -1,0 +1,87 @@
+.register_container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background:  linear-gradient( rgba(111 , 0 ,255 , 1) 0% , rgba(55 , 0 ,255 , 1)100%);
+}
+.register_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30vw;
+  height: 40vw;
+  min-height: 450px;
+  margin: 1vw;
+  box-shadow:  0 0 25px -2.5px;
+  border-radius: 16px;
+  background-color: white;
+}
+.register_button {
+  width: 35%;
+  height: 30px;
+  margin-top: 1.5vw;
+  border-radius: 32px;
+  border: none;
+  background-color: #ccc;
+}
+.register_button.enabled {
+  background-color: rgb(219,112,147);
+}
+.register_intro {
+ display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1vw;
+  width: 35vw;
+  height: 50vw;
+  border-radius: 16px;
+  color: #ccc;
+  text-align: center;
+  font-size: 2vw;
+}
+.register_intro img {
+  width: 65px;
+  height: 65px;
+  transition: width 150ms ease-in-out, height 150ms ease-in-out;
+}
+.register_intro img:hover {
+  width: 80px;
+  height: 80px;
+  transition: width 150ms ease-in-out, height 150ms ease-in-out;
+}
+.register_container form input {
+  width: 60%;
+  border-radius: 12px;
+  border: 1px solid #2b2b2b;
+  height: 15px;
+  text-indent: 5px;
+  outline: none;
+}
+.register_container p {
+  margin: 0.5vw 0 0.5vw 0;
+  font-weight: bold;                                              
+}
+form input:focus {
+  background-color: #ccc;
+}
+.moon_container2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0vw 2vw 0vw;
+}
+.moon2 {
+  width: 8vw;
+  height: 8vw;
+  background-color: transparent;
+  border-radius: 1000px;
+  box-shadow: 2vw 2vw 0 0.2vw rgb(219,112,147);
+  transition: box-shadow 500ms ease-in-out;    
+  transform: translateX(-2vw);
+}
