@@ -67,6 +67,7 @@ class StoreProducts extends PureComponent {
                                 status = {product.productStatus}
                                 type = {product.productType}
                                 description ={product.productDescription}
+                                ref = {null}
                               />
                             )
                         })}

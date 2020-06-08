@@ -23,7 +23,6 @@ const ProductList = (props) => {
                 <div className="product_carrito">
                     <img alt="carrito" src={Carrito}></img>
                 </div>
-                <div /*Spacer*/ style={{ width: "12.5vw" }}></div>
                 <div className="product_info_icon">
 
                 </div>

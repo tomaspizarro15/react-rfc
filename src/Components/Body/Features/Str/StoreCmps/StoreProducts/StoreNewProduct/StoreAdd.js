@@ -16,7 +16,7 @@ class StoreAdd extends Component {
                 validation: {
                     required: true,
                     minL: 4,
-                    maxL: 16,
+                    maxL: 32,
                     special: true,
                 },
                 inputConfig: {
@@ -41,7 +41,7 @@ class StoreAdd extends Component {
                     placeholder: "Price",
                     type: "number",
                 },
-                value: 0,
+                value: "",
                 validated: false,
             },
             productImg: {
@@ -71,7 +71,7 @@ class StoreAdd extends Component {
                     placeholder: "Stock",
                     type: "number",
                 },
-                value: 0,
+                value: "",
                 validated: false,
             },
             productColor: {
@@ -150,7 +150,6 @@ class StoreAdd extends Component {
                     required: true,
                     minL: 8,
                     maxL: 128,
-                    special: true,
                 },
                 inputConfig: {
                     placeholder: "Description",
@@ -213,14 +212,15 @@ class StoreAdd extends Component {
         return (isValid)
     }
     submitHandler = (event) => {
+        const productValidation = {}
         const productPost = {}
         let isValid = true;
         event.preventDefault();
         for (let id in this.state.fields) {
-            productPost[id] = this.state.fields[id].validated;
+            productValidation[id] = this.state.fields[id].validated;
 
-            isValid = productPost[id] && isValid; 
-
+            isValid = productValidation[id] && isValid; 
+            productPost[id] = this.state.fields[id].value; 
         }
         if(isValid){
 
@@ -232,15 +232,31 @@ class StoreAdd extends Component {
             this.setState({formIsValid : false})
 
         }
-        
-        console.log(this.state.formIsValid); 
- 
+  
+    }
+
+    resetValuesHandler = () => {
+
+        let newFields = {...this.state.fields}
+
+        for(let id in newFields){
+
+          if(newFields[id].type ==="input" || newFields[id].type ==="textarea") {
+
+            newFields[id].value = ""; 
+
+          }
+          
+        }
+
+        this.setState({fields : newFields})
+
     }
 
     closeModalHandler = () =>{
 
         this.setState({formIsValid : undefined})
-
+        this.resetValuesHandler(); 
     }
 
     render() {
@@ -261,7 +277,7 @@ class StoreAdd extends Component {
         modalDisplay = (
             <StoreModal
                 title = "Product Error"
-                 message = "Please complete all fields with valid data to create productasda!"
+                 message = "Please complete all fields with valid data to create product!"
                  click = {this.closeModalHandler}
             />
         )
