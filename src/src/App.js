@@ -17,16 +17,15 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Route path="/" exact component={Body} />
-          <Route path="/featured" render={() => <Features />} />
-          <Route path={`/new_product`} render={() => <StoreAdd />} />
+          <Route path = "/featured" render = {()=> <Features/>}/>
+          <Route path={`/new_product`} render = {() => <StoreAdd/>}/>
+          {this.props.validation ?
+            <React.Fragment>
+              <Header />
+            </React.Fragment>
+            : <Redirect to="/register" />
+          }
           <Route path="/register" exact component={Register} />
-
-          <React.Fragment>
-            <Header />
-          </React.Fragment>
-          <Redirect to="/register" />
-
-
         </div>
       </BrowserRouter>
     );

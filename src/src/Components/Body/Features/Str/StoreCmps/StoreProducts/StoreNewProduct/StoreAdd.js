@@ -5,7 +5,6 @@ import axios from '../../../../../../Axios/Instances/ProductInstance';
 import StorePreview from './StPreview';
 import * as Api from '../../../../../../Axios/Actions/Service/api';
 import * as Regex from './../../../../../../Regex/Regex';
-import StoreModal from './StoreModal';
 class StoreAdd extends Component {
 
     state = {
@@ -22,6 +21,7 @@ class StoreAdd extends Component {
                 inputConfig: {
                     placeholder: "Name / Title",
                     type: "text",
+                    className: "form_field",
                 },
                 value: "",
                 validated: false,
@@ -33,13 +33,13 @@ class StoreAdd extends Component {
                 header: "Product Price",
                 validation: {
                     required: true,
-                    numeric : true, 
                     minL: 1,
                     maxL: 8,
                 },
                 inputConfig: {
                     placeholder: "Price",
                     type: "number",
+                    className: "form_field",
                 },
                 value: 0,
                 validated: false,
@@ -63,13 +63,12 @@ class StoreAdd extends Component {
                 header: "Product Stock Quantity",
                 validation: {
                     required: true,
-                    numeric : true,
-                    minL: 1,
-                    maxL: 8,
+                    special: true,
                 },
                 inputConfig: {
                     placeholder: "Stock",
                     type: "number",
+                    className: "form_field",
                 },
                 value: 0,
                 validated: false,
@@ -90,6 +89,7 @@ class StoreAdd extends Component {
                 inputConfig: {
                     placeholder: "Status",
                     type: "",
+                    className: "form_field",
                 },
                 validation : {
                     required : false, 
@@ -118,6 +118,7 @@ class StoreAdd extends Component {
                 inputConfig: {
                     placeholder: "Type of product",
                     type: "text",
+                    className: "form_field",
                 },
                 validation : {
                     required : false, 
@@ -135,6 +136,7 @@ class StoreAdd extends Component {
                 inputConfig: {
                     placeholder: "Status",
                     type: "",
+                    className: "form_field",
                 },
                 validation: {
                     required: true,
@@ -154,12 +156,13 @@ class StoreAdd extends Component {
                 },
                 inputConfig: {
                     placeholder: "Description",
+                    className: "form_field",
                 },
                 value: "",
                 validated: false,
             },
         },
-        formIsValid: undefined,
+        formIsValid: false,
     }
     inputChangeHandler = (event, id) => {
         const newField = { ...this.state.fields[id] }
@@ -181,7 +184,7 @@ class StoreAdd extends Component {
             )
 
         }
-        
+
         console.log(validation)
 
     }
@@ -202,71 +205,27 @@ class StoreAdd extends Component {
                 isValid = obj.value.length <= validation.maxL && isValid;
             }
             if (validation.special) {
-                isValid = regex.test(obj.value) && isValid;
+                isValid = regex.test(obj.value) && isValid
             }
-            if(validation.numeric) {
-                isValid = obj.value > 0 && isValid;
-            }
+
             field.validated = isValid;
             forms[id] = field;
         }
         return (isValid)
     }
+
+    fileHandler = (event) => {
+        console.log("IMG SRC", event.target.value)
+    }
     submitHandler = (event) => {
         const productPost = {}
-        let isValid = true;
         event.preventDefault();
         for (let id in this.state.fields) {
-            productPost[id] = this.state.fields[id].validated;
-
-            isValid = productPost[id] && isValid; 
-
+            productPost[id] = this.state.fields[id].value
         }
-        if(isValid){
-
-            Api.apiInstance.post("products", productPost)
-            this.setState({formIsValid : true})
-
-        }else{
-
-            this.setState({formIsValid : false})
-
-        }
-        
-        console.log(this.state.formIsValid); 
- 
+        Api.apiInstance.post("products", productPost);
     }
-
-    closeModalHandler = () =>{
-
-        this.setState({formIsValid : undefined})
-
-    }
-
     render() {
-
-        let modalDisplay; 
-
-        let tumama; 
-
-        if(this.state.formIsValid){
-            modalDisplay = (
-                <StoreModal
-                title = "Product Added"
-                 message = "A Prouct has been created succesfully to the site!"
-                 click = {this.closeModalHandler}
-                 />
-            )
-    }else if(this.state.formIsValid === false){
-        modalDisplay = (
-            <StoreModal
-                title = "Product Error"
-                 message = "Please complete all fields with valid data to create productasda!"
-                 click = {this.closeModalHandler}
-            />
-        )
-    }
-
         const productFields = [];
         for (let id in this.state.fields) {
             productFields.push({
@@ -312,7 +271,7 @@ class StoreAdd extends Component {
                                 )
                             })}
                         </div>
-                        <button type = "submit">Create product</button>
+                        <button type="submit" onClick={this.checkValidationHandler}>Create product</button>
                     </form>
                     <StorePreview
                         name={this.state.fields.productTitle.value}
@@ -322,11 +281,12 @@ class StoreAdd extends Component {
                         status={this.state.fields.productStatus.value}
                         imgs={this.state.thumbnail}
                     />
-                    {modalDisplay}   
                 </div>
             </div>
         )
+
     }
+
 }
 
 export default StoreAdd; 

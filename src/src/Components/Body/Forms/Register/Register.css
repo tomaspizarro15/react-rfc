@@ -40,7 +40,7 @@
   width: 35vw;
   height: 50vw;
   border-radius: 16px;
-  color: #ccc;
+  color: #2b2b2b;
   text-align: center;
   font-size: 2vw;
 }
@@ -64,7 +64,7 @@
 }
 .register_container p {
   margin: 0.5vw 0 0.5vw 0;
-  font-weight: bold;                                              
+  font-weight: bold;
 }
 form input:focus {
   background-color: #ccc;

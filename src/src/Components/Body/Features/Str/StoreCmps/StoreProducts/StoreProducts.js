@@ -18,8 +18,16 @@ class StoreProducts extends PureComponent {
 
     componentDidMount() {
         Api.apiInstance.get("products").then(data => this.setState({ prods: data }))
+        console.log("State Mounted [StoreProducts.js]")
 
         this.displayHandler(this.state.prods);
+    }
+
+    componentDidUpdate() {
+        console.log("Backend received products", this.state.prods)
+        console.log("State Updated [StoreProducts.js]", this.state.prodsList)
+
+
     }
 
     displayHandler = () => {
@@ -40,6 +48,8 @@ class StoreProducts extends PureComponent {
     render() {
 
         const products = this.displayHandler();
+
+        console.log(products)
         let ComponentDisplay;
         if (products.length === 0) {
 
