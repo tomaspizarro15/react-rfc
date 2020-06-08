@@ -233,7 +233,7 @@ class StoreAdd extends Component {
 
         }
         
-        console.log(this.state.formIsValid)
+        console.log(this.state.formIsValid); 
  
     }
     render() {
