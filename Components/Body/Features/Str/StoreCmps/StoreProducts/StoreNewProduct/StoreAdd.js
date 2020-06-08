@@ -247,6 +247,8 @@ class StoreAdd extends Component {
 
         let modalDisplay; 
 
+        let tumama; 
+
         if(this.state.formIsValid){
             modalDisplay = (
                 <StoreModal
