@@ -250,7 +250,7 @@ class StoreAdd extends Component {
         modalDisplay = (
             <StoreModal
                 title = "Product Error"
-                name = "Please complete all fields with valid data to create product!"
+                name = "Please complete all fields with valid data to create productasda!"
             />
         )
     }
