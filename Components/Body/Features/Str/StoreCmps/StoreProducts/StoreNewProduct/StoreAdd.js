@@ -236,6 +236,13 @@ class StoreAdd extends Component {
         console.log(this.state.formIsValid); 
  
     }
+
+    closeModalHandler = () =>{
+
+        this.setState({formIsValid : undefined})
+
+    }
+
     render() {
 
         let modalDisplay; 
