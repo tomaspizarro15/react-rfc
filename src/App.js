@@ -16,11 +16,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Route path="/" exact component={Body} />
-          <Route path="/featured" render={() => <Features />} />
-          <Route path={`/new_product`} render={() => <StoreAdd />} />
-          <Route path="/register" exact component={Register} />
-
+          <Switch>
+            <Route path="/featured" exact component = {Features} />
+            <Route path="/register" exact component ={Register} />
+            <Route path="/" exact component={Body} />
+          </Switch>
           <React.Fragment>
             <Header />
           </React.Fragment>

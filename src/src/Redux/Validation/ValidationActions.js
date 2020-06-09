@@ -1,2 +1,0 @@
-export const VALIDATE_USER = 'VALIDATE_USER'; 
-export const INVALIDATE_USER = 'INVALIDATE_USER';

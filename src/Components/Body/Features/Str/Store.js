@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import './Store.css';
 import FeaturedSlider from "./StoreUX/FeaturedSlider";
 import StoreProducts from "./StoreCmps/StoreProducts/StoreProducts";
+import { BrowserRouter, Route } from "react-router-dom";
+import StoreAdd from "./StoreCmps/StoreProducts/StoreNewProduct/StoreAdd";
 
 class Store extends Component {
 
@@ -55,8 +57,6 @@ class Store extends Component {
     }
 
     render() {
-
-
         let cardWidth = 100 * this.state.sliderCards.length;
         return (
             <div className="str_main">
@@ -73,7 +73,9 @@ class Store extends Component {
                     })}
                 </ul>
                 <StoreProducts
+                    url = {this.props.match.path}
                 />
+                   
             </div>
         )
 

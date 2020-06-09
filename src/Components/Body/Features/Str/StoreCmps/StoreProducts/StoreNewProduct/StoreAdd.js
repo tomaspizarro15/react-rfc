@@ -262,8 +262,8 @@ class StoreAdd extends Component {
     render() {
 
         let modalDisplay; 
-
-        let tumama; 
+        
+        console.log(this.props)
 
         if(this.state.formIsValid){
             modalDisplay = (

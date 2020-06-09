@@ -84,7 +84,7 @@ class StoreProducts extends PureComponent {
                     </div>
                     {ComponentDisplay}
                         <div className="products_add">
-                            <NavLink to="/new_product">+</NavLink>
+                            <NavLink to={`${this.props.url}/new_product?`}>+</NavLink>
                         </div>
                 </div>
 

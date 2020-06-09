@@ -24,7 +24,6 @@ const ProductList = (props) => {
                     <img alt="carrito" src={Carrito}></img>
                 </div>
                 <div className="product_info_icon">
-
                 </div>
             </div>
         </li>

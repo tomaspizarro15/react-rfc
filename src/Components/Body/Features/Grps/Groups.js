@@ -3,7 +3,13 @@ import './../Features.css';
 
 class Groups extends Component {
 
+    state = {
+
+        path :"",
+
+    }
     render() {
+        console.log(this.props)
 
         return(
             <div>
