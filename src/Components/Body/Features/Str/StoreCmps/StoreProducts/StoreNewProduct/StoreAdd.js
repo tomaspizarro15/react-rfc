@@ -6,6 +6,7 @@ import StorePreview from './StPreview';
 import * as Api from '../../../../../../Axios/Actions/Service/api';
 import * as Regex from './../../../../../../Regex/Regex';
 import StoreModal from './StoreModal';
+import { NavLink } from 'react-router-dom';
 class StoreAdd extends Component {
 
     state = {
@@ -262,8 +263,6 @@ class StoreAdd extends Component {
     render() {
 
         let modalDisplay; 
-        
-        console.log(this.props)
 
         if(this.state.formIsValid){
             modalDisplay = (
@@ -329,6 +328,7 @@ class StoreAdd extends Component {
                             })}
                         </div>
                         <button type = "submit">Create product</button>
+                        <NavLink to = {"/features/store"}>Back</NavLink>
                     </form>
                     <StorePreview
                         name={this.state.fields.productTitle.value}
@@ -340,6 +340,7 @@ class StoreAdd extends Component {
                     />
                     {modalDisplay}   
                 </div>
+               
             </div>
         )
     }

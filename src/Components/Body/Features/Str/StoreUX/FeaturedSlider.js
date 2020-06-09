@@ -6,9 +6,6 @@ const FeaturedSlider = props => {
 
     return (
         <li>
-            {props.title}
-            <a>{props.id}</a>
-            <button onClick={props.click}>Test</button>
         </li>
     )
 

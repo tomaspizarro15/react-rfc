@@ -19,6 +19,20 @@
     height: 100%;
     text-align: center;
 }
+.header_logo a {
+  font-size: 3vmin;
+  color: white;
+  text-decoration: none;
+  font-weight: bolder;
+  transition: color 250ms , font-size 250ms; 
+  transition-delay: 100ms;
+}
+.header_logo a:hover {
+  color: #FF7369;
+  font-size: 3.25vmin;
+  transition: color 250ms , font-size 250ms; 
+  transition-delay: 100ms;
+}
 .app_header h1 {
   font-size: 25px;
   color: white;

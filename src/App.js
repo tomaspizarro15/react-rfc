@@ -17,14 +17,14 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Switch>
-            <Route path="/featured" exact component = {Features} />
-            <Route path="/register" exact component ={Register} />
+            <Route path="/features" component = {Features} />
+            <Route path="/register" component ={Register} />
             <Route path="/" exact component={Body} />
           </Switch>
           <React.Fragment>
             <Header />
           </React.Fragment>
-          <Redirect to="/register" />
+          <Redirect to="/register"/>
 
 
         </div>
