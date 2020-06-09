@@ -5,7 +5,7 @@ import Store from './Str/Store';
 import StoreAdd from './Str/StoreCmps/StoreProducts/StoreNewProduct/StoreAdd'
 import Gallery from './Glry/Gallery';
 import Groups from './Grps/Groups';
-
+import Products from '../../../container/products/Products';
 
 class Features extends Component {
 
@@ -32,17 +32,18 @@ class Features extends Component {
                     <div className="features_navigator">
                         {this.state.featuresComponents.map(featuresComponent => {
                             return (
-                                <NavLink activeClassName = "features_navlink" onClick = {(event) => this.alertHandler(event , featuresComponent.id)} key={featuresComponent.id} to={this.props.match.url + featuresComponent.url}>{featuresComponent.name}</NavLink>
+                                <NavLink activeClassName = {"features_navlink"} onClick = {(event) => this.alertHandler(event , featuresComponent.id)} key={featuresComponent.id} to={this.props.match.url + featuresComponent.url}>{featuresComponent.name}</NavLink>
                             )
 
                         })}
                     </div>
                     <div className ="features_component">
                         <Switch>
-                            <Route path={this.props.match.url + "/store/new_product"} component={StoreAdd} />
-                            <Route path={this.props.match.url + "/store"} component={Store} />
-                            <Route path={this.props.match.url + "/gallery"} component={Gallery} />
-                            <Route path={this.props.match.url + "/groups"} component={Groups} />
+                            <Route path={this.props.match.url + "/store/new_product"} component= {StoreAdd} />
+                            <Route path={this.props.match.url + "/store"} exact component= {Store} />
+                            <Route path={this.props.match.url + "/gallery"} component= {Gallery} />
+                            <Route path={this.props.match.url + "/groups"} component= {Groups} />
+                            <Route path = {this.props.match.url + "/store/products"} render = {() => <Products/>}/>
                         </Switch>
                     </div>
                 </div>

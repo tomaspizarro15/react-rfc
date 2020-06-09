@@ -1,8 +1,10 @@
 import React from 'react';
 import './ProductList.css';
 import Carrito from './../../../StoreUX/StrIcons/icono_carrito.png'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 const ProductList = (props) => {
+
+
     return (
         <li>
             <div className="product_title">
@@ -24,10 +26,10 @@ const ProductList = (props) => {
                 <div className="product_carrito">
                     <img alt="carrito" src={Carrito}></img>
                 </div>
-                <NavLink to="/products">
+                <Link to = {"/features/store/products"+ props.id}>
                     <div className="product_info_icon">
                     </div>
-                </NavLink>
+                </Link>
             </div>
         </li>
     )

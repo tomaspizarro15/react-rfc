@@ -38,8 +38,10 @@ class StoreProducts extends PureComponent {
     }
 
     render() {
-
+        console.log("[StoreProducts.js")
         const products = this.displayHandler();
+
+
         let ComponentDisplay;
         if (products.length === 0) {
 
@@ -67,7 +69,7 @@ class StoreProducts extends PureComponent {
                                 status = {product.productStatus}
                                 type = {product.productType}
                                 description ={product.productDescription}
-                                ref = {null}
+                                ref = {this.props.url}
                               />
                             )
                         })}

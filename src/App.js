@@ -19,8 +19,7 @@ class App extends Component {
           <Switch>
             <Route path="/features" component = {Features} />
             <Route path="/register" component ={Register} />
-            <Route path="/" exact component={Body} />
-            <Route path = "/products" component = {Products}/>
+            <Route path="/" component={Body} />
           </Switch>
           <React.Fragment>
             <Header />
