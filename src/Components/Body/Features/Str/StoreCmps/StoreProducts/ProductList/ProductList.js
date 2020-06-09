@@ -1,6 +1,7 @@
 import React from 'react';
 import './ProductList.css';
 import Carrito from './../../../StoreUX/StrIcons/icono_carrito.png'
+import { NavLink } from 'react-router-dom';
 const ProductList = (props) => {
     return (
         <li>
@@ -16,15 +17,17 @@ const ProductList = (props) => {
 
             </div>
             <div className="product_price">
-                <div className ="price"><p>${props.price}</p></div>
-                <div className ="status"><p>{props.status}</p></div>
+                <div className="price"><p>${props.price}</p></div>
+                <div className="status"><p>{props.status}</p></div>
             </div>
             <div className="product_description">
                 <div className="product_carrito">
                     <img alt="carrito" src={Carrito}></img>
                 </div>
-                <div className="product_info_icon">
-                </div>
+                <NavLink to="/products">
+                    <div className="product_info_icon">
+                    </div>
+                </NavLink>
             </div>
         </li>
     )

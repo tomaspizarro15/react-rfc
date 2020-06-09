@@ -5,7 +5,7 @@
     align-items: center;
     margin-top: 50px;
     width: 100%;
-    background-color: #E05046;
+    background-color: #eee;
 }
 .features_navigator {
     display: flex;
@@ -13,19 +13,29 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 90%;
     height: 3vw;
     margin: 10px;
-    background-color: white;
+    background-color: #ccc;
     border-radius: 4px;
+  
 }
 .features_navigator a {
-    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 25vw;
     text-decoration: none;
     font-size: 2vmin;
     font-weight: bold;
-    color:#2b2b2b;
-    
+    color: #2b2b2b;
+    transition: background-color 150ms ease;
+}
+.features_navlink {
+    background-color: #ffffff;
+}
+.features_navigator a:hover {
+    transition: background-color 150ms ease;
 }
 .features_component {
     width: 100%;

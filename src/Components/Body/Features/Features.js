@@ -11,21 +11,28 @@ class Features extends Component {
 
     state = {
         featuresComponents: [
-            { id: 0, name: "Store", url: "/store" },
-            { id: 1, name: "Groups", url: "/groups" },
-            { id: 2, name: "Gallery", url: "/gallery" },
+            { id: 0, name: "Store", url: "/store"  , status : false},
+            { id: 1, name: "Groups", url: "/groups"  , status : false},
+            { id: 2, name: "Gallery", url: "/gallery"  , status : false},
         ]
     }
+
+    alertHandler(event , id) {
+
+    
+
+    }
+
     render() {
 
-        console.log("Props in features", this.props.match.url)
+        console.log( " [Features.js] ,  Routing props", this.props.match.url)
         return (
             <BrowserRouter>
                 <div className="features">
                     <div className="features_navigator">
                         {this.state.featuresComponents.map(featuresComponent => {
                             return (
-                                <NavLink key={featuresComponent.id} to={this.props.match.url + featuresComponent.url}>{featuresComponent.name}</NavLink>
+                                <NavLink activeClassName = "features_navlink" onClick = {(event) => this.alertHandler(event , featuresComponent.id)} key={featuresComponent.id} to={this.props.match.url + featuresComponent.url}>{featuresComponent.name}</NavLink>
                             )
 
                         })}
