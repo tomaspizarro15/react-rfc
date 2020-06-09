@@ -5,6 +5,7 @@ import HeaderTools from './HeaderTools/HeaderTools';
 import SearchBar from './HeaderInput/SearchBar';
 import BurgerButton from './BurgerButton/BurgerButton';
 import ProfileButton from './ProfileButton/ProfileButton';
+import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
     state = {
@@ -12,7 +13,7 @@ class Header extends Component {
         headerTools: {
             store: {
                 title: "Store",
-                href: "/featured/store"
+                href: "/features/store"
             },
             groups: {
                 title: "Groups",
@@ -54,12 +55,12 @@ class Header extends Component {
         }
         return (
             <div className="app_header">
-                <div className="header_logo"><h1>RFC</h1></div>
+                <div className="header_logo"><NavLink to ="/">RFC</NavLink></div>
                 <div className="header_search_bar">
                     <SearchBar />
                 </div>
                 <div className="header_tools">
-                    {headerTools.map(tool => <HeaderTools key = {tool.id}click={() => this.redirectHeaderHandler(tool.id)} id={tool.id} href = {tool.href}/>)}
+                   <NavLink to = "/features/store">Features</NavLink>
                 </div>
                 <div className="header_profile_button">
                     <ProfileButton />
