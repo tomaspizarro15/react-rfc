@@ -15,9 +15,9 @@
     align-items: center;
     text-align: center;
     height: 3vw;
-    background-color: #ccc;
     border-radius: 4px;
     margin: 10px 0 10px 0;
+    box-shadow: 0px 0px 25px -5px;
 }
 .features_navigator a {
     display: flex;
