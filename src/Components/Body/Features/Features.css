@@ -7,6 +7,11 @@
     width: 100%;
     background-color: #eee;
 }
+.features_component{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .features_navigator {
     display: flex;
     flex-direction: row;
@@ -32,7 +37,7 @@
     transition: background-color 150ms ease;
 }
 .features_navlink {
-    background-color: #ffffff;
+    background-color: #32ED80;
 }
 .features_navigator a:hover {
     transition: background-color 150ms ease;

@@ -3,12 +3,8 @@ import './ProductList.css';
 import Carrito from './../../../StoreUX/StrIcons/icono_carrito.png'
 import { NavLink, Link } from 'react-router-dom';
 const ProductList = (props) => {
-
-
-    console.log(props)
-
     return (
-        <li>
+        <li onClick = {props.click}>
             <div className="product_title">
                 <div className="product_name">
                     {props.props.productTitle}

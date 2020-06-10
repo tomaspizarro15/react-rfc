@@ -35,8 +35,14 @@ class StoreProducts extends PureComponent {
 
     }
 
+    navigateToProd = (id) => {
+
+        this.props.navProp({pathname: this.props.url + "/" + id})
+
+    }
+
     render() {
-        console.log("[StoreProducts.js")
+        console.log("[StoreProducts.js" , this.props.navProp)
         const products = this.displayHandler();
 
 
@@ -61,6 +67,7 @@ class StoreProducts extends PureComponent {
                               <ProductList
                                 key = {product.id}
                                 props = {product}
+                                click = {() => this.navigateToProd(product.id)}
                               />
                             )
                         })}

@@ -21,13 +21,32 @@ class Store extends Component {
             { id: 4, title: "Courses", content: "" },
         ],
         value: 0,
-        url : this.props.match.url,
-    }  
-     componentDidMount() {
+        url: this.props.match.url,
 
-      let uuid1 = uuid.v4();
-      console.log(uuid1)
- 
+    }
+    componentDidMount() {
+
+        let uuid1 = uuid.v4();
+        console.log(uuid1)
+
+    }
+    componentDidMount() {
+
+    }
+
+    displayHandler = () => {
+
+        let newProducts = [];
+        for (let id in this.state.prods) {
+            console.log("backend prods iterations")
+            newProducts.push({
+                id: id,
+                ...this.state.prods[id],
+            })
+        }
+
+        return (newProducts)
+
     }
 
 
@@ -60,33 +79,39 @@ class Store extends Component {
             }
         }, 10000);
     }
-    render() {
-        console.log("Routing props in store", this.props.match.url)
 
+    render() {                                                                              
         let cardWidth = 100 * this.state.sliderCards.length;
         return (
-            <div className="str_main">
-                <ul style={{ marginLeft: `-${this.state.value * 100}%`, width: `${cardWidth}%`, }}>
-                    {this.state.sliderCards.map(card => {
-                        return (
-                            <FeaturedSlider
-                                id={this.state.value}
-                                key={card.id}
-                                title={card.title}
-                            />
-                        )
-                    })}
-                </ul>
-                <StoreProducts
-                    url={this.props.match.path}
-                />
-                <div className="add_container">
-                    <div className ="products_add">
-                        <NavLink to = { this.props.match.url + "/new_product"}>+</NavLink>
-                    </div>
-                   
+            <React.Fragment>
+                <div className="str_main">
+                    <ul style={{ marginLeft: `-${this.state.value * 100}%`, width: `${cardWidth}%`, }}>
+                        {this.state.sliderCards.map(card => {
+                            return (
+                                <FeaturedSlider
+                                    id={this.state.value}
+                                    key={card.id}
+                                    title={card.title} 
+                                />
+                            )
+                        })}
+                    </ul>
                 </div>
-            </div>
+                <div>
+                    <StoreProducts
+                        click = {this.navToProduct}
+                        url={this.props.match.path}
+                        navProp = {this.props.history.push}
+                    />
+                    <div className="add_container">
+                        <div className="products_add">
+                            <NavLink to={this.props.match.url + "/new_product"}>+</NavLink>
+                        </div>
+
+                    </div>
+                </div>
+            </React.Fragment>
+
         )
 
     }
