@@ -19,14 +19,9 @@ class App extends Component {
           <Switch>
             <Route path="/features" component = {Features} />
             <Route path="/register" component ={Register} />
-            <Route path="/" component={Body} />
+            <Route path="/" component={Body} />       
           </Switch>
-          <React.Fragment>
             <Header />
-          </React.Fragment>
-          <Redirect to="/register"/>
-
-
         </div>
       </BrowserRouter>
     );

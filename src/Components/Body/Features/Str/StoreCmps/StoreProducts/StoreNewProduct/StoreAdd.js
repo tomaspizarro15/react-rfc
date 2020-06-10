@@ -243,7 +243,7 @@ class StoreAdd extends Component {
         for(let id in newFields){
 
           if(newFields[id].type ==="input" || newFields[id].type ==="textarea") {
-
+            newFields[id].validated = false;
             newFields[id].value = ""; 
 
           }
@@ -301,7 +301,7 @@ class StoreAdd extends Component {
                   <input ref={this.fileInput} style={{ opacity: 0, width: "0", height: "0" }} type="file" onChange={(event) => this.fileHandler(event)}></input>
                 </label>
             </div>
-        )
+        )                                                           
 
         return (
             <div className="new_prod_background">

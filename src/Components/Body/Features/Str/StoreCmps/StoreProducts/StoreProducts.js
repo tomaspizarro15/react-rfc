@@ -7,8 +7,6 @@ import * as Api from '../../../../../Axios/Actions/Service/api';
 import ProductList from './ProductList/ProductList';
 import ProductSearcher from './ProductSearcher/ProductSearcher';
 
-
-
 class StoreProducts extends PureComponent {
 
     state = {
@@ -62,14 +60,7 @@ class StoreProducts extends PureComponent {
                             return (
                               <ProductList
                                 key = {product.id}
-                                id = {product.id}
-                                name = {product.productTitle}
-                                price = {product.productPrice}
-                                color = {product.productColor}
-                                status = {product.productStatus}
-                                type = {product.productType}
-                                description ={product.productDescription}
-                                ref = {this.props.url}
+                                props = {product}
                               />
                             )
                         })}
@@ -77,17 +68,15 @@ class StoreProducts extends PureComponent {
                 </div>
             )
         }
-
         return (
             <div className="products_container">
                 <div className="products">
                     <ProductSearcher/>
                     <div className="products_info">
                     </div>
-                    {ComponentDisplay}
-                      
-                </div>
-
+                    {ComponentDisplay}                      
+                </div>  
+                <Route path =""/>
             </div>
 
         );

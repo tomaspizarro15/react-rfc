@@ -40,10 +40,10 @@ class Features extends Component {
                     <div className ="features_component">
                         <Switch>
                             <Route path={this.props.match.url + "/store/new_product"} component= {StoreAdd} />
-                            <Route path={this.props.match.url + "/store"} exact component= {Store} />
+                            <Route path={this.props.match.url + "/store"}  component= {Store} />
                             <Route path={this.props.match.url + "/gallery"} component= {Gallery} />
                             <Route path={this.props.match.url + "/groups"} component= {Groups} />
-                            <Route path = {this.props.match.url + "/store/products"} render = {() => <Products/>}/>
+                            <Route path = {this.props.match.url + "/store/products"} component = {Products}/>
                         </Switch>
                     </div>
                 </div>
