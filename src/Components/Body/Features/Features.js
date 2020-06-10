@@ -5,7 +5,7 @@ import Store from './Str/Store';
 import StoreAdd from './Str/StoreCmps/StoreProducts/StoreNewProduct/StoreAdd'
 import Gallery from './Glry/Gallery';
 import Groups from './Grps/Groups';
-import Products from '../../../container/products/Products';
+import FullProduct from './Str/StoreCmps/StoreProducts/products/FullProduct';
 
 class Features extends Component {
 
@@ -40,7 +40,7 @@ class Features extends Component {
                     <div className ="features_component">
                         <Switch>
                             <Route path={this.props.match.url + "/store/new_product"} component= {StoreAdd} />
-                            <Route path = {this.props.match.url + '/store/:id'}  component = {Products}/>
+                            <Route path = {this.props.match.url + '/store/:id'} exact component = {FullProduct}/>
                             <Route path={this.props.match.url + "/store"} exact  component= {Store} />
                             <Route path={this.props.match.url + "/gallery"} exact component= {Gallery} />
                             <Route path={this.props.match.url + "/groups"} exact component= {Groups} />           

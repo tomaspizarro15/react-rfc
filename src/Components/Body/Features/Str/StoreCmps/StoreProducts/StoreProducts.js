@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import './../../Store.css';
 import './StoreProducts.css'
-import Lupa from '../../StoreUX/StrIcons/StrSearchLupa';
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import * as Api from '../../../../../Axios/Actions/Service/api';
 import ProductList from './ProductList/ProductList';
 import ProductSearcher from './ProductSearcher/ProductSearcher';
@@ -16,7 +15,6 @@ class StoreProducts extends PureComponent {
 
     componentDidMount() {
         Api.apiInstance.get("products").then(data => this.setState({ prods: data }))
-
         this.displayHandler(this.state.prods);
     }
 

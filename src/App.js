@@ -6,13 +6,8 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Register from './Components/Body/Forms/Register/Register';
 import { connect } from 'react-redux';
 import Features from './Components/Body/Features/Features';
-import Products from './container/products/Products';
-
-
 class App extends Component {
   render() {
-
-
     return (
       <BrowserRouter>
         <div className="App">

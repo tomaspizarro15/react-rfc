@@ -4,13 +4,9 @@
     justify-content: center;
     align-items: center;
     margin-top: 50px;
-    width: 100%;
-    background-color: #eee;
 }
-.features_component{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.features_component {
+    width: 100%;
 }
 .features_navigator {
     display: flex;
@@ -19,10 +15,9 @@
     align-items: center;
     text-align: center;
     height: 3vw;
-    margin: 10px;
     background-color: #ccc;
     border-radius: 4px;
-  
+    margin: 10px 0 10px 0;
 }
 .features_navigator a {
     display: flex;
@@ -41,7 +36,4 @@
 }
 .features_navigator a:hover {
     transition: background-color 150ms ease;
-}
-.features_component {
-    width: 100%;
 }
