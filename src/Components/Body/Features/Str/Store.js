@@ -80,42 +80,13 @@ class Store extends Component {
         }, 10000);
     }
 
-    slideLeft = () => {
-
-        
-
-    }
-
     render() {
 
 
         let cardWidth = 100 * this.state.sliderCards.length;
         return (
             <React.Fragment>
-                <div className="str_main">
-                    <div className="arrow">
-                        <div className="arrow_left">
-                        </div>
-                    </div>
-                    <div className ="str_slider">
-                        <ul style={{ width: `${cardWidth}%` }}>
-                            {this.state.sliderCards.map(card => {
-                                return (
-                                    <FeaturedSlider
-                                        id={this.state.value}
-                                        key={card.id}
-                                        title={card.title}
-                                    />
-                                )
-                            })}
-                        </ul> 
-                    </div>
-                    <div className="arrow">
-                        <div className="arrow_right">
-
-                        </div>
-                    </div>
-                </div>
+                <FeaturedSlider/>
                 <div>
                     <StoreProducts
                         click={this.navToProduct}
