@@ -1,31 +1,64 @@
 .str_main{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-content: center;
+    align-items:  center;
     width: 100%;
     height: 50%;
     border-radius: 4px 4px 0 0;
     text-align: center;
     color: white;
     background-color: grey;
-    overflow: hidden;
 }
 .str_main ul {
     display: flex;
     flex-direction: row;
     color: black;
     padding: 0;
-    height: 40vw;
-    width: 300%;
+    height: 30vw;
+    overflow: hidden;
     transition: margin-left 2000ms ease-in-out;
+}
+.str_slider {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 92.5%;
+}
+.arrow {
+    transform: rotate(45deg);
+    width: 25px;
+    height: 25px;
+}
+.arrow:hover {
+    cursor: pointer;
+}
+.arrow_left {
+    width: 100%;
+    height: 100%;
+    box-shadow:  -5px 5px 0px 0 black;
+    transition: box-shadow 250ms ease-in-out;
+}
+.arrow_left:hover {
+    box-shadow: -5px 5px 0 0 #32ED80;
+    transition: box-shadow 250ms ease-in-out;
+}
+.arrow_right {
+    width: 100%;
+    height: 100%;
+    box-shadow:  5px -5px 0px 0px black;
+    transition: box-shadow 250ms ease-in-out;
+}
+.arrow_right:hover {
+    box-shadow: 5px -5px 0 0 #32ED80;
+    transition: box-shadow 250ms ease-in-out;
 }
 .str_main li {
     text-align: center;
     list-style: none;
     width: 100%;
     border-radius: 4px;
-    margin: 0 20px 0 20px;
+    margin: 0 5px 0 5px;
     background-color: white;
 }
 .str_main a {

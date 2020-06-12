@@ -80,28 +80,47 @@ class Store extends Component {
         }, 10000);
     }
 
-    render() {                                                                              
+    slideLeft = () => {
+
+        
+
+    }
+
+    render() {
+
+
         let cardWidth = 100 * this.state.sliderCards.length;
         return (
             <React.Fragment>
                 <div className="str_main">
-                    <ul style={{ marginLeft: `-${this.state.value * 100}%`, width: `${cardWidth}%`, }}>
-                        {this.state.sliderCards.map(card => {
-                            return (
-                                <FeaturedSlider
-                                    id={this.state.value}
-                                    key={card.id}
-                                    title={card.title} 
-                                />
-                            )
-                        })}
-                    </ul>
+                    <div className="arrow">
+                        <div className="arrow_left">
+                        </div>
+                    </div>
+                    <div className ="str_slider">
+                        <ul style={{ width: `${cardWidth}%` }}>
+                            {this.state.sliderCards.map(card => {
+                                return (
+                                    <FeaturedSlider
+                                        id={this.state.value}
+                                        key={card.id}
+                                        title={card.title}
+                                    />
+                                )
+                            })}
+                        </ul> 
+                    </div>
+                    <div className="arrow">
+                        <div className="arrow_right">
+
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <StoreProducts
-                        click = {this.navToProduct}
+                        click={this.navToProduct}
                         url={this.props.match.path}
-                        navProp = {this.props.history.push}
+                        navProp={this.props.history.push}
                     />
                     <div className="add_container">
                         <div className="products_add">
