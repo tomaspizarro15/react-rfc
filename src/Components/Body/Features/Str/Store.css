@@ -25,6 +25,11 @@
     overflow: hidden;
     width: 92.5%;
 }
+.str_slider ul{
+
+    transition: margin 350ms ease;
+
+}
 .arrow {
     transform: rotate(45deg);
     width: 25px;

@@ -4,6 +4,7 @@ import FeaturedSlider from "./StoreUX/FeaturedSlider";
 import StoreProducts from "./StoreCmps/StoreProducts/StoreProducts";
 import { BrowserRouter, Route, NavLink } from "react-router-dom";
 import StoreAdd from "./StoreCmps/StoreProducts/StoreNewProduct/StoreAdd";
+import * as Api from "../../../Axios/Actions/Service/api";
 const uuid = require("uuid")
 
 class Store extends Component {
@@ -20,6 +21,7 @@ class Store extends Component {
             { id: 3, title: "Courses", content: "" },
             { id: 4, title: "Courses", content: "" },
         ],
+        products: undefined,
         value: 0,
         url: this.props.match.url,
 
@@ -31,6 +33,8 @@ class Store extends Component {
 
     }
     componentDidMount() {
+
+        Api.apiInstance.get("products").then(products => this.setState({products : products}))
 
     }
 
@@ -49,49 +53,20 @@ class Store extends Component {
 
     }
 
-
-    componentDidUpdate() {
-
-        console.log(this.state.url)
-
-    }
-
-    counterHandler = (incrementador, avanzar) => {
-
-        setTimeout(() => {
-            if (incrementador < this.state.sliderCards.length - 1 && avanzar) {
-                incrementador++;
-                avanzar = true;
-
-                this.counterHandler(incrementador, avanzar);
-                this.setState({ value: incrementador })
-            } else {
-
-                incrementador--;
-                avanzar = false;
-                this.counterHandler(incrementador, avanzar);
-                this.setState({ value: incrementador })
-                if (incrementador === 0) {
-                    incrementador = 0;
-                    avanzar = true;
-                    this.counterHandler(incrementador, avanzar);
-                }
-            }
-        }, 10000);
-    }
-
     render() {
-
 
         let cardWidth = 100 * this.state.sliderCards.length;
         return (
             <React.Fragment>
-                <FeaturedSlider/>
+                <FeaturedSlider
+                    products = {this.state.products}
+                />
                 <div>
                     <StoreProducts
                         click={this.navToProduct}
                         url={this.props.match.path}
                         navProp={this.props.history.push}
+                        products = {this.state.products}
                     />
                     <div className="add_container">
                         <div className="products_add">

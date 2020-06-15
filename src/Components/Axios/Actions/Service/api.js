@@ -7,6 +7,7 @@ export class api {
 
         axios.post(`/${url}.json`, args)
             .then(r => console.log(r.config.data))
+            .catch(e => console.log(e))
 
     }
 
@@ -16,6 +17,7 @@ export class api {
                 .then(r => r.data)
                 .then(data => {
                     return (data)
+
                 })
                 .catch(error => console.log(error))
         )
