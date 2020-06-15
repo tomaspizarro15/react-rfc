@@ -11,9 +11,9 @@ class Features extends Component {
 
     state = {
         featuresComponents: [
-            { id: 0, name: "Store", url: "/store"  , status : false},
-            { id: 1, name: "Groups", url: "/groups"  , status : false},
-            { id: 2, name: "Gallery", url: "/gallery"  , status : false},
+            { id: 0, name: "Home", url: "/store"  , status : false},
+            { id: 1, name: "Features", url: "/groups"  , status : false},
+            { id: 2, name: "Trending", url: "/gallery"  , status : false},
         ]
     }
 
@@ -34,7 +34,6 @@ class Features extends Component {
                             return (
                                 <NavLink activeClassName = {"features_navlink"} onClick = {(event) => this.alertHandler(event , featuresComponent.id)} key={featuresComponent.id} to={this.props.match.url + featuresComponent.url}>{featuresComponent.name}</NavLink>
                             )
-
                         })}
                     </div>
                     <div className ="features_component">

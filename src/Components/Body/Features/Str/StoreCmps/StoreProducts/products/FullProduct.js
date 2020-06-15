@@ -23,8 +23,20 @@ class FullProduct extends Component {
         return (
             <div className="full_product_container">
                 <div className="full_product">
-                    <div className ="product"></div>
-                    <div className ="product"></div>
+                    <div className ="product">
+                        <div className ="product_thumbnail">
+
+                        </div>
+                        <ul className ="product_images">
+
+                        </ul>
+                        <div className ="product_products_related">
+
+                        </div>
+                    </div>
+                    <div className ="product">
+
+                    </div>
                 </div>
             </div>
         )

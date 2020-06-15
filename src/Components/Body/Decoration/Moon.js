@@ -7,7 +7,7 @@ const DecoMoon = () => {
 
     return (
         <div className ="moon_container">
-            <p>Let's begin learning</p>
+            <p>RFC is in Progress</p>
             <div className="moon">
 
             </div>
