@@ -200,7 +200,7 @@ class Register extends PureComponent {
         axios.post('/users.json', values)
             .then(response => console.log(response))
             .then(console.log("Axios request sended"))
-            .then(this.props.validateUser)
+            .then(this.props.validateUser) /*ACA SE HACE EL CAMBIO DE ESTADO DE LA APLICACION REDUX, SE LLAMA AL REDUCER Y EJECUTA LA ACCION*/
             .catch(error => console.log("something went wrong", error))
     }
 
@@ -217,11 +217,7 @@ class Register extends PureComponent {
         console.log(formValue)
 
         if (this.state.validation) {
-
             this.postRegisterHandler(formValue);
-
-
-
         }
     }
     render() {

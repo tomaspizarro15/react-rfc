@@ -17,8 +17,6 @@ const reducer = (state = inicialState, action) => {
         case validation.INVALIDATE_USER : 
       
         return {validation : false} 
-        
-        
     }
       
     return (state);

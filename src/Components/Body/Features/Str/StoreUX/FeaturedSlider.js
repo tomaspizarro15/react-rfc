@@ -11,30 +11,11 @@ class FeaturedSlider extends Component {
         products: {},
         value: 0,
     }
-
-
-
     slideHandler = (value, stopValue) => {
-
-
         if (this.state.value !== stopValue) {
-
-            console.log("Value when to stop", stopValue)
-
             let valor = this.state.value
-
             this.setState({ value: valor + value })
-            console.log("State value" , this.state.value);
         }
-
-        else(
-
-            console.log("Cant slide further"),
-            console.log("Value when to stop", stopValue)
-
-        )
-
-
     }
 
     render() {

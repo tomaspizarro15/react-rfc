@@ -21,11 +21,10 @@ class FullProduct extends Component {
     }
     render() {
         return (
-            <div className="full_product_container">
+            <div className="full_product_container" style = {{backgroundColor : "red"}}> 
                 <div className="full_product">
                     <div className ="product">
                         <div className ="product_thumbnail">
-
                         </div>
                         <ul className ="product_images">
 

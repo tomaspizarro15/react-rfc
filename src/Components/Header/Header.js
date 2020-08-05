@@ -9,58 +9,60 @@ import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
     state = {
+        headerTools: [
+            {
+                title  : 'Features',
+                path: '/features/store',
+            },
 
-        headerTools: {
-            store: {
-                title: "Store",
-                href: "/features/store"
-            },
-            groups: {
-                title: "Groups",
-                href: "/featured/groups"
-            },
-            gallery: {
-                title: "Gallery",
-                href: "/featured/gallery"
+            {
+                title  : 'Log In',
+                path: '/login',
             }
-        }
+
+        ]
+
     }
 
     render() {
 
-        let auth = false; 
-        let headerTools = []; 
+        let auth = false;
+        let featuredTools = [];
+        let tools = [];
+        if (auth === false) {
 
-        if(auth === false){
-
-            const headerTools = {...this.state.headerTools}; 
+            const featuredTools = { ...this.state.featuredTools };
             const headerArray = []
-            for(let id in headerTools){
+            for (let id in featuredTools) {
 
-              headerArray.push(
-                  {href : headerTools[id].href}
-              )
-                
+                headerArray.push(
+                    { href: featuredTools[id].href }
+                )
             }
-
         }
 
-        for (let id in this.state.headerTools) {
-
-            headerTools.push({
-            ...this.state.headerTools[id],
+        for (let id in this.state.featuredTools) {
+            featuredTools.push({
+                ...this.state.featuredTools[id],
                 id: id,
             })
-            
         }
+
+
+
         return (
             <div className="app_header">
-                <div className="header_logo"><NavLink to ="/">RFC</NavLink></div>
+                <div className="header_logo"><NavLink to="/">RFC</NavLink></div>
                 <div className="header_search_bar">
                     <SearchBar />
                 </div>
                 <div className="header_tools">
-                   <NavLink to = "/features/store">Features</NavLink>
+                    {this.state.headerTools.map(headerTool => {
+                        console.log("Header tools", headerTool.path)
+                        return (
+                        <NavLink to={headerTool.path}>{headerTool.title}</NavLink>
+                        )
+                    })}
                 </div>
                 <div className="header_profile_button">
                     <ProfileButton />

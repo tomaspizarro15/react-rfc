@@ -264,7 +264,6 @@ label:hover {
 }
 /*Media Queries*/
 @media (max-width : 768px){
-
     .new_prod_container {
         margin-top: 0;
         flex-direction: column;

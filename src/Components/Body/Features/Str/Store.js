@@ -1,13 +1,12 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import './Store.css';
 import FeaturedSlider from "./StoreUX/FeaturedSlider";
 import StoreProducts from "./StoreCmps/StoreProducts/StoreProducts";
-import { BrowserRouter, Route, NavLink } from "react-router-dom";
-import StoreAdd from "./StoreCmps/StoreProducts/StoreNewProduct/StoreAdd";
+import {NavLink } from "react-router-dom";
 import * as Api from "../../../Axios/Actions/Service/api";
 const uuid = require("uuid")
 
-class Store extends Component {
+class Store extends PureComponent {
 
     state = {
 
